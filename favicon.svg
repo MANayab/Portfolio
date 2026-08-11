@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MAN monogram">
+  <rect width="64" height="64" rx="12" fill="#0F2438"/>
+  <path d="M14 46V18h6.2l9.3 15.6L38.7 18H45v28h-6.4V28.9l-7.7 12.9h-3.9l-7.6-12.8V46H14Z" fill="#C0923D"/>
+  <rect x="10" y="10" width="44" height="44" rx="9" fill="none" stroke="#C0923D" stroke-width="1.4" opacity="0.55"/>
+</svg>
