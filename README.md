@@ -1,8 +1,7 @@
 # Mohammed Abdul Nayab — Portfolio
 
 Personal portfolio website for **Mohammed Abdul Nayab**, an operations, administration
-and CRM professional based in Hyderabad, Telangana, India, with international work
-experience across India, the UAE and Canada.
+and CRM professional based in Hyderabad, Telangana, India, with professional experience in India and the UAE, personal travel experience in Canada, and a growing software-development portfolio.
 
 **Live site:** https://manayab.github.io/Portfolio/
 
@@ -16,7 +15,7 @@ experience across India, the UAE and Canada.
 
 ```
 index.html          Main page — hero, about, expertise, experience,
-                     career progression, international experience,
+                     career progression, Canada travel, projects,
                      education, languages, contact
 styles.css           Design system + all page styles
 script.js             Mobile nav toggle, active-link highlighting, footer year
@@ -55,15 +54,13 @@ so the site works correctly both locally and at `https://manayab.github.io/Portf
 
 All professional information (employers, job titles, dates, locations,
 education, competencies and languages) is taken directly from the CV supplied
-by Mohammed Abdul Nayab. No projects, certifications, employers or social
-profiles have been invented; none are listed because none were present in the
-source CV.
+by Mohammed Abdul Nayab. DocuExtract is listed as a personal software project based on the public repository at https://github.com/MANayab/DocuExtract. Canada is presented as travel, not Canadian employment.
 
 ## SEO / AEO
 
 - Single H1, semantic landmark structure, descriptive meta title/description
 - Canonical URL, Open Graph and Twitter/X card metadata
-- `schema.org` JSON-LD (`Person`, `ProfilePage`, `ItemList`, `BreadcrumbList`)
+- `schema.org` JSON-LD (`Person`, `SoftwareApplication`, `ProfilePage`, `ItemList`, `BreadcrumbList`)
   describing the same facts as the visible HTML
 - `sitemap.xml` and `robots.txt` pointing to the canonical production URL
 
