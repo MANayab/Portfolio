@@ -888,3 +888,26 @@ section:first-of-type {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Portfolio additions: software project and Canada travel */
+.section-intro { max-width: 680px; margin: 0; color: var(--text-lo); line-height: 1.7; }
+.travel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.travel-place { position: relative; min-height: 116px; padding: 22px 20px 18px 64px; border: 1px solid var(--line-strong); background: rgba(255,255,255,.025); }
+.travel-number { position: absolute; left: 18px; top: 21px; color: var(--brass-bright); font: 600 13px var(--font-display); }
+.travel-place h3 { margin: 0 0 8px; color: var(--text-hi); font: 600 18px var(--font-display); }
+.travel-place p { margin: 0; color: var(--text-lo); font-size: 14px; }
+.project-card { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); overflow: hidden; border: 1px solid var(--line-strong); background: rgba(255,255,255,.025); }
+.project-visual { position: relative; display: flex; align-items: center; min-height: 300px; padding: 22px; background: #f1ede4; }
+.project-visual img { display: block; width: 100%; height: auto; }
+.project-index { position: absolute; left: 22px; top: 18px; padding: 6px 9px; color: var(--ink-900); background: var(--brass-bright); font: 600 10px var(--font-display); letter-spacing: .08em; }
+.project-copy { padding: clamp(24px, 4vw, 42px); }
+.project-copy h3 { margin: 4px 0 8px; color: var(--text-hi); font: 700 clamp(28px, 4vw, 38px) var(--font-display); }
+.project-copy p { color: var(--text-lo); line-height: 1.75; }
+.project-copy .project-tagline { margin-top: 0; color: var(--brass-bright); font-weight: 600; }
+.project-privacy { padding-left: 14px; border-left: 2px solid var(--brass); font-size: 13px; }
+.project-privacy strong { color: var(--text-hi); }
+.project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 24px; }
+.project-tags span { padding: 6px 9px; border: 1px solid var(--line-strong); color: var(--paper); font: 500 12px var(--font-display); }
+.project-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 760px) { .project-card { grid-template-columns: 1fr; } .project-visual { min-height: 210px; } .travel-grid { grid-template-columns: 1fr; } }
