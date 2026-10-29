@@ -89,8 +89,14 @@ def main():
     for key in ("og:type", "og:title", "og:description", "og:url", "og:site_name", "twitter:card", "twitter:title", "twitter:description"):
         require(bool(parser.meta.get(key)), f"social preview metadata {key} is present")
     require(parser.meta.get("og:url") == EXPECTED, "Open Graph URL matches canonical URL")
-    if not parser.meta.get("og:image") and not parser.meta.get("twitter:image"):
-        print("WARN no og:image/twitter:image is configured; link previews will use platform fallback artwork")
+    image_url = parser.meta.get("og:image", "")
+    require(image_url == BASE + "social-preview.png", "Open Graph image points to the portfolio's published social-preview.png")
+    require(parser.meta.get("twitter:image") == image_url, "Twitter image matches the Open Graph image")
+    require(parser.meta.get("twitter:card") == "summary_large_image", "Twitter card requests a large image preview")
+    require(parser.meta.get("og:image:type") == "image/png", "Open Graph image type is PNG")
+    image_body, image_type = fetch(image_url)
+    require(image_type == "image/png", f"social preview image is served as PNG ({image_type})")
+    require(len(image_body) > 1000 and image_body.startswith(b"\\x89PNG\\r\\n\\x1a\\n"), "social preview image is a non-empty valid PNG response")
 
     found_types = set()
     for block in parser.jsonld:
