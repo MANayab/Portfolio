@@ -2,7 +2,7 @@ name: Portfolio browser regression
 
 on:
   push:
-    branches: [fix/mobile-dashboard-production]
+    branches: [fix/mobile-dashboard-production, main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -39,6 +39,49 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: portfolio-browser-screenshots
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 14
+
+  live-pages-regression:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: chromium-layout
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser test dependency
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Wait for the updated GitHub Pages deployment
+        env:
+          LIVE_URL: https://manayab.github.io/Portfolio/
+        run: |
+          for i in $(seq 1 60); do
+            if curl --silent --fail "$LIVE_URL" | grep -q 'styles.css?v=20261029-mobile-fix'; then
+              echo "Updated cache-busted assets are live."
+              exit 0
+            fi
+            echo "Waiting for Pages deployment ($i/60)..."
+            sleep 10
+          done
+          echo "Timed out waiting for updated GitHub Pages HTML."
+          exit 1
+      - name: Verify the live Pages site in Chromium
+        env:
+          PORTFOLIO_BASE_URL: https://manayab.github.io/Portfolio/
+        run: node tests/portfolio-browser-check.cjs
+      - name: Upload live-site screenshots and metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-live-pages-screenshots
           path: artifacts/
           if-no-files-found: warn
           retention-days: 14
