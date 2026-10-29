@@ -5,6 +5,7 @@ const path = require('node:path');
 
 (async () => {
   const out = path.join(process.cwd(), 'artifacts');
+  const baseUrl = process.env.PORTFOLIO_BASE_URL || 'http://127.0.0.1:4173/';
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch({ headless: true });
   const failures = [];
@@ -21,7 +22,7 @@ const path = require('node:path');
       page.on('console', message => {
         if (message.type() === 'error') failures.push(`[${viewport.name}px] console: ${message.text()}`);
       });
-      const response = await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+      const response = await page.goto(baseUrl, { waitUntil: 'networkidle' });
       assert(response && response.ok(), `HTTP response failed at ${viewport.name}px`);
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(250);
@@ -89,7 +90,7 @@ const path = require('node:path');
     const reduced = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await reduced.emulateMedia({ reducedMotion: 'reduce' });
     reduced.on('pageerror', error => failures.push(`[reduced-motion] pageerror: ${error.message}`));
-    const response = await reduced.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+    const response = await reduced.goto(baseUrl, { waitUntil: 'networkidle' });
     assert(response && response.ok(), 'Reduced-motion page failed to load');
     const motion = await reduced.evaluate(() => ({
       canvasDisplay: getComputedStyle(document.querySelector('.signal-canvas')).display,
