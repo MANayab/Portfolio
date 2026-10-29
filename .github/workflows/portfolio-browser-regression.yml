@@ -79,10 +79,20 @@ jobs:
         run: node tests/portfolio-browser-check.cjs
       - name: Verify live /404 route and manifest URL
         run: |
-          curl --silent --show-error --output /tmp/portfolio-404.html --write-out '%{http_code}' https://manayab.github.io/Portfolio/404 > /tmp/portfolio-404-status.txt
-          test "$(cat /tmp/portfolio-404-status.txt)" = "404"
-          grep -q 'Page not found' /tmp/portfolio-404.html
-          curl --silent --show-error --fail https://manayab.github.io/Portfolio/manifest.webmanifest | grep -q '"theme_color": "#080d18"'
+          status="$(curl --silent --show-error --output /tmp/portfolio-404.html --write-out '%{http_code}' https://manayab.github.io/Portfolio/404)"
+          echo "Live /Portfolio/404 HTTP status: $status"
+          if ! grep -q 'Page not found' /tmp/portfolio-404.html; then
+            echo "Live /Portfolio/404 did not return the custom 404 document; response preview:"
+            sed -n '1,40p' /tmp/portfolio-404.html
+            exit 1
+          fi
+          if [ "$status" != "404" ]; then
+            echo "Expected HTTP 404 from /Portfolio/404, received $status."
+            exit 1
+          fi
+          curl --silent --show-error --fail https://manayab.github.io/Portfolio/manifest.webmanifest -o /tmp/portfolio-manifest.webmanifest
+          grep -q '"theme_color": "#080d18"' /tmp/portfolio-manifest.webmanifest
+          echo "Live manifest URL and theme color verified."
       - name: Upload live-site screenshots and metrics
         if: always()
         uses: actions/upload-artifact@v4
