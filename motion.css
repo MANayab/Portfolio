@@ -1,0 +1,78 @@
+/* Motion system: composited transform/opacity only; no content is hidden until JS is ready. */
+:root { --motion-orange: #ff6a24; --motion-blue: #47baff; --motion-yellow: #ffd34e; }
+.motion-progress {
+  position: fixed; inset: 0 auto auto 0; z-index: 9999; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--motion-orange), var(--motion-blue), var(--motion-yellow));
+  transform: scaleX(0); transform-origin: left center; pointer-events: none;
+}
+.motion-reveal { opacity: 1; transform: none; }
+.motion-ready .motion-reveal:not(.motion-visible) { opacity: 0; transform: translate3d(0, 18px, 0); }
+.motion-ready .motion-reveal.motion-visible { opacity: 1; transform: translate3d(0, 0, 0); transition: opacity 520ms ease, transform 520ms cubic-bezier(.2,.7,.2,1); }
+.motion-reveal[data-motion-order="1"] { transition-delay: 60ms; }
+.motion-reveal[data-motion-order="2"] { transition-delay: 120ms; }
+.motion-reveal[data-motion-order="3"] { transition-delay: 180ms; }
+.site-nav a { position: relative; }
+.site-nav a[aria-current="true"] { color: var(--text-hi); }
+.site-nav a[aria-current="true"]::after {
+  content: ""; position: absolute; left: .1rem; right: .1rem; bottom: .15rem; height: 2px;
+  background: var(--motion-orange); transform: scaleX(1); transform-origin: left center;
+}
+.experience-list, .experience-timeline, .experience-items { position: relative; }
+.experience-list::before, #experience .experience-list::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: rgba(71,186,255,.14); transform: scaleY(1); transform-origin: top center;
+}
+#experience .experience-item { position: relative; }
+#experience .experience-item::before {
+  content: ""; position: absolute; left: -1.36rem; top: .35rem; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--motion-orange); box-shadow: 0 0 0 4px rgba(255,106,36,.12);
+  opacity: .4; transform: scale(.7);
+}
+#experience .experience-item.motion-visible::before { opacity: 1; transform: scale(1); transition: opacity 360ms ease, transform 360ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card, .ops-focus, .ops-route, .experience-item, .expertise-item, .language-chip, .travel-place {
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+  .project-card:hover, .ops-focus:hover, .ops-route:hover, .experience-item:hover, .expertise-item:hover, .language-chip:hover, .travel-place:hover {
+    transform: translate3d(0,-3px,0);
+  }
+  .motion-button { transition: transform 180ms ease, opacity 180ms ease; }
+  .motion-button:hover { opacity: .96; }
+}
+.btn-primary, .btn-ghost { position: relative; isolation: isolate; }
+.btn-primary::before, .btn-ghost::before {
+  content: ""; position: absolute; inset: -3px; z-index: -1; border-radius: inherit;
+  background: radial-gradient(circle, rgba(71,186,255,.25), rgba(255,106,36,.12) 55%, transparent 72%);
+  opacity: 0; transform: scale(.94); transition: opacity 180ms ease, transform 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover::before, .btn-ghost:hover::before, .btn-primary:focus-visible::before, .btn-ghost:focus-visible::before {
+    opacity: 1; transform: scale(1);
+  }
+}
+.docu-app-window .app-file-row, .docu-app-window .app-data-table, .docu-app-window .app-export-row { position: relative; }
+#projects.motion-demo-active .docu-app-window .app-file-row { animation: docu-flow-in 460ms ease both; }
+#projects.motion-demo-active .docu-app-window .app-data-table { animation: docu-flow-in 460ms 100ms ease both; }
+#projects.motion-demo-active .docu-app-window .app-export-row { animation: docu-flow-in 460ms 200ms ease both; }
+@keyframes docu-flow-in { from { opacity: .35; transform: translate3d(0,8px,0); } to { opacity: 1; transform: translate3d(0,0,0); } }
+@media (hover: none), (pointer: coarse) {
+  .project-card, .ops-focus, .ops-route, .experience-item, .expertise-item, .language-chip, .travel-place,
+  .project-card:hover, .ops-focus:hover, .ops-route:hover, .experience-item:hover, .expertise-item:hover, .language-chip:hover, .travel-place:hover {
+    transform: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-progress { display: none; }
+  .motion-ready .motion-reveal, .motion-ready .motion-reveal:not(.motion-visible), .motion-ready .motion-reveal.motion-visible {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+  .motion-ready #experience .experience-item::before { opacity: 1 !important; transform: none !important; transition: none !important; }
+  #projects.motion-demo-active .docu-app-window .app-file-row,
+  #projects.motion-demo-active .docu-app-window .app-data-table,
+  #projects.motion-demo-active .docu-app-window .app-export-row { animation: none !important; }
+  .motion-button, .btn-primary::before, .btn-ghost::before { transition: none !important; }
+}
+
+/* Scroll-drawn career spine: composited scaleY overlay, never layout geometry. */
+#experience .experience-list::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--motion-orange), var(--motion-blue), var(--motion-yellow)); transform: scaleY(0); transform-origin: top center; opacity: .9; pointer-events: none; }
+#experience .experience-list.motion-timeline-active::after { transform: scaleY(var(--timeline-progress, 0)); }
