@@ -93,6 +93,15 @@ const path = require('node:path');
         window.scrollTo(0, 0);
       });
       await page.waitForTimeout(700);
+      await page.locator('img').evaluateAll(async images => {
+        await Promise.all(images.map(img => {
+          img.loading = 'eager';
+          return img.decode().catch(() => null);
+        }));
+      });
+      const imageState = await page.locator('img').evaluateAll(images => images.map(img => ({ src: img.src, complete: img.complete, naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight })));
+      const brokenImages = imageState.filter(img => !img.complete || img.naturalWidth === 0);
+      assert.deepEqual(brokenImages, [], `Broken images at ${viewport.name}px: ${JSON.stringify(brokenImages)}`);
       await page.screenshot({ path: path.join(out, `portfolio-${viewport.name}px.png`), fullPage: true, animations: 'disabled' });
       fs.writeFileSync(path.join(out, `metrics-${viewport.name}px.json`), JSON.stringify(layout, null, 2));
       console.log(`PASS ${viewport.name}px: ${JSON.stringify({ documentWidth: layout.documentWidth, hero: layout.hero, status: layout.status, cssHref: layout.cssHref })}`);

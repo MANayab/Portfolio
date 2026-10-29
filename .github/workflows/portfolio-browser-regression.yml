@@ -64,7 +64,7 @@ jobs:
           LIVE_URL: https://manayab.github.io/Portfolio/
         run: |
           for i in $(seq 1 60); do
-            if curl --silent --fail "$LIVE_URL" | grep -q 'styles.css?v=20261029-mobile-fix'; then
+            if curl --silent --fail "$LIVE_URL" | grep -q 'styles.css?v=20261029-mobile-fix' && curl --silent --fail "${LIVE_URL}assets/docuextract-pipeline.svg" | grep -q 'viewBox="0 0 960 600"'; then
               echo "Updated cache-busted assets are live."
               exit 0
             fi
