@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Mohammed Abdul Nayab — Portfolio</title>
+  <desc id="desc">Developer portfolio featuring DocuExtract, practical web projects, operations and CRM experience.</desc>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#101929" stroke-width="1"/></pattern>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c8431f"/><stop offset="1" stop-color="#e1b931"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#080d18"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <g fill="none" stroke-width="3" opacity=".9">
+    <path d="M650 145 C720 90 770 220 850 165 S980 115 1200 155" stroke="#c8431f"/>
+    <path d="M620 195 C710 145 770 265 870 210 S1050 165 1200 205" stroke="#2690cd"/>
+    <path d="M600 245 C710 195 780 310 890 255 S1070 220 1200 260" stroke="#e1b931"/>
+  </g>
+  <rect x="54" y="54" width="1092" height="522" rx="28" fill="#0c1422" stroke="#2e3b4e" stroke-width="2"/>
+  <rect x="88" y="88" width="10" height="454" rx="5" fill="url(#accent)"/>
+  <rect x="132" y="105" width="244" height="42" rx="21" fill="#271c1c" stroke="#743624"/>
+  <text x="152" y="132" font-family="monospace" font-size="17" letter-spacing="1.5" fill="#f4845b">DEVELOPER PORTFOLIO</text>
+  <text x="132" y="218" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="48" fill="#f3f0e8">Mohammed Abdul Nayab</text>
+  <text x="136" y="270" font-family="Arial, Helvetica, sans-serif" font-size="27" fill="#b7c3d3">Software · Operations · Reporting</text>
+  <path d="M136 322H1050" stroke="#344358" stroke-width="2"/>
+  <g font-family="monospace" font-size="17" fill="#ebeff4">
+    <rect x="136" y="356" width="204" height="48" rx="12" fill="#141f2f" stroke="#c8431f" stroke-width="2"/>
+    <text x="151" y="386">DOCUEXTRACT</text>
+    <rect x="360" y="356" width="190" height="48" rx="12" fill="#141f2f" stroke="#2690cd" stroke-width="2"/>
+    <text x="375" y="386">WEB PROJECTS</text>
+    <rect x="570" y="356" width="252" height="48" rx="12" fill="#141f2f" stroke="#e1b931" stroke-width="2"/>
+    <text x="585" y="386">HYDERABAD, INDIA</text>
+  </g>
+  <text x="136" y="466" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#9aa9bc">Building practical tools and clear, reliable digital experiences.</text>
+  <text x="136" y="515" font-family="monospace" font-size="16" letter-spacing="1" fill="#7b8fa4">MANAYAB.GITHUB.IO/PORTFOLIO</text>
+</svg>

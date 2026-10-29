@@ -11,11 +11,22 @@ permissions:
   contents: read
 
 jobs:
+  proposed-seo:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out proposed branch
+        uses: actions/checkout@v4
+      - name: Validate proposed HTML, sitemap, robots, structured data and social artwork
+        run: python3 tests/portfolio-live-seo-audit.py --local
+
   live-seo:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Check out audit
         uses: actions/checkout@v4
-      - name: Verify live sitemap, robots, structured data and social metadata
+      - name: Verify deployed Pages sitemap, robots, structured data and social metadata
         run: python3 tests/portfolio-live-seo-audit.py

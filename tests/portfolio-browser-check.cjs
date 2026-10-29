@@ -91,6 +91,8 @@ const path = require('node:path');
       const manifest = await manifestResponse.json();
       assert.equal(manifest.theme_color, '#080d18', 'Manifest theme color does not match the site');
       assert.equal(manifest.background_color, '#080d18', 'Manifest background color does not match the site');
+      assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://manayab.github.io/Portfolio/social-preview.svg', 'Open Graph image URL is missing or incorrect');
+      assert.equal(await page.locator('meta[name="twitter:image"]').getAttribute('content'), 'https://manayab.github.io/Portfolio/social-preview.svg', 'Twitter image URL is missing or incorrect');
       if (viewport.width <= 900) {
         assert(layout.statusLabel.bottom <= layout.statusValue.top + 1, 'System status label and value are glued together');
         assert(layout.kpiLabel.bottom <= layout.kpis.bottom, 'KPI label is not visible');
