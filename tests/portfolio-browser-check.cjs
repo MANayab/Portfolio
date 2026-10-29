@@ -72,7 +72,7 @@ const path = require('node:path');
       assert.equal(layout.terminalStyle.fontFamily.includes('monospace') || layout.terminalStyle.fontFamily.includes('Plex Mono'), true,
         'Terminal output is not using a monospace font');
       assert.equal(layout.canonical, 'https://manayab.github.io/Portfolio/', 'Canonical URL changed');
-      if (viewport.width <= 420) {
+      if (viewport.width <= 900) {
         assert(layout.statusLabel.bottom <= layout.statusValue.top + 1, 'System status label and value are glued together');
         assert(layout.kpiLabel.bottom <= layout.kpis.bottom, 'KPI label is not visible');
         await page.locator('#navToggle').click();
@@ -81,6 +81,7 @@ const path = require('node:path');
         await page.locator('#navToggle').click();
         assert.equal(await page.locator('#navToggle').getAttribute('aria-expanded'), 'false', 'Mobile nav did not close');
       }
+      await page.screenshot({ path: path.join(out, `portfolio-${viewport.name}px-viewport.png`), fullPage: false, animations: 'disabled' });
       await page.screenshot({ path: path.join(out, `portfolio-${viewport.name}px.png`), fullPage: true, animations: 'disabled' });
       fs.writeFileSync(path.join(out, `metrics-${viewport.name}px.json`), JSON.stringify(layout, null, 2));
       console.log(`PASS ${viewport.name}px: ${JSON.stringify({ documentWidth: layout.documentWidth, hero: layout.hero, status: layout.status, cssHref: layout.cssHref })}`);
