@@ -1,58 +1,21 @@
-(function () {
-  "use strict";
-
-  // Footer year
-  var yearEl = document.getElementById("year");
-  if (yearEl) {
-    yearEl.textContent = String(new Date().getFullYear());
-  }
-
-  // Mobile nav toggle
-  var toggle = document.getElementById("navToggle");
-  var nav = document.getElementById("siteNav");
-
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var isOpen = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    nav.addEventListener("click", function (event) {
-      if (event.target.tagName === "A") {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  // Active link highlighting on scroll
-  var navLinks = nav ? Array.prototype.slice.call(nav.querySelectorAll("a[href^='#']")) : [];
-  var sections = navLinks
-    .map(function (link) {
-      var id = link.getAttribute("href").slice(1);
-      return document.getElementById(id);
-    })
-    .filter(Boolean);
-
-  if ("IntersectionObserver" in window && sections.length) {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          var link = nav.querySelector('a[href="#' + entry.target.id + '"]');
-          if (!link) return;
-          if (entry.isIntersecting) {
-            navLinks.forEach(function (l) {
-              l.removeAttribute("aria-current");
-            });
-            link.setAttribute("aria-current", "true");
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
-    );
-
-    sections.forEach(function (section) {
-      observer.observe(section);
-    });
-  }
+(function(){
+"use strict";
+var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var yearEl=document.getElementById("year");if(yearEl)yearEl.textContent=String(new Date().getFullYear());
+var toggle=document.getElementById("navToggle"),nav=document.getElementById("siteNav");
+if(toggle&&nav){toggle.addEventListener("click",function(){var open=nav.classList.toggle("is-open");toggle.setAttribute("aria-expanded",String(open));});nav.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("a")){nav.classList.remove("is-open");toggle.setAttribute("aria-expanded","false");}});}
+var navLinks=nav?Array.prototype.slice.call(nav.querySelectorAll("a[href^='#']")):[],sections=navLinks.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));}).filter(Boolean);
+if("IntersectionObserver"in window){var no=new IntersectionObserver(function(entries){entries.forEach(function(e){if(!e.isIntersecting)return;navLinks.forEach(function(a){if(a.getAttribute("href")==="#"+e.target.id)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current");});});},{rootMargin:"-22% 0px -65% 0px",threshold:0});sections.forEach(function(s){no.observe(s);});}
+var reveals=Array.prototype.slice.call(document.querySelectorAll("main>section,.experience-item,.expertise-item,.project-card,.education-item,.travel-place,.contact-panel"));reveals.forEach(function(el){el.setAttribute("data-reveal","");});
+if(reduceMotion||!("IntersectionObserver"in window))reveals.forEach(function(el){el.classList.add("is-visible");});
+else{var ro=new IntersectionObserver(function(entries,observer){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("is-visible");observer.unobserve(e.target);}});},{threshold:.08,rootMargin:"0px 0px -24px 0px"});reveals.forEach(function(el){ro.observe(el);});}
+var counters=Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+function count(el){if(el.dataset.counted)return;el.dataset.counted="1";var target=Number(el.getAttribute("data-count")),suffix=el.getAttribute("data-suffix")||"";if(!Number.isFinite(target))return;if(reduceMotion){el.textContent=String(target)+suffix;return;}var start=performance.now(),duration=650;function tick(now){var p=Math.min(1,(now-start)/duration);el.textContent=String(Math.round(target*(1-Math.pow(1-p,3))))+suffix;if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);}
+if(reduceMotion||!("IntersectionObserver"in window))counters.forEach(count);else{var co=new IntersectionObserver(function(entries,observer){entries.forEach(function(e){if(e.isIntersecting){count(e.target);observer.unobserve(e.target);}});},{threshold:.6});counters.forEach(function(el){co.observe(el);});}
+var typing=document.querySelector("[data-typing]");if(typing&&!reduceMotion){var phrase=typing.getAttribute("data-typing")||typing.textContent;typing.textContent="";var i=0;function type(){if(i>=phrase.length)return;typing.textContent+=phrase.charAt(i++);window.setTimeout(type,36);}window.setTimeout(type,240);}
+var canvas=document.getElementById("signalCanvas"),ctx=canvas&&canvas.getContext?canvas.getContext("2d",{alpha:true}):null;
+if(canvas&&ctx&&!reduceMotion){var width=0,height=0,dpr=1,frame=0,raf=0,streams=[{color:"255,106,42",y:.22,phase:.2,amp:22,speed:.00075},{color:"70,184,255",y:.48,phase:2.4,amp:30,speed:.00058},{color:"246,211,75",y:.73,phase:4.5,amp:18,speed:.00066}];
+function resize(){dpr=Math.min(window.devicePixelRatio||1,1.5);width=Math.max(1,window.innerWidth);height=Math.max(1,window.innerHeight);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.width=width+"px";canvas.style.height=height+"px";ctx.setTransform(dpr,0,0,dpr,0,0);}
+function draw(){frame++;ctx.clearRect(0,0,width,height);streams.forEach(function(s,idx){ctx.beginPath();for(var x=-20;x<=width+20;x+=12){var y=height*s.y+Math.sin(x*.004+frame*s.speed+s.phase)*s.amp+Math.sin(x*.0017-frame*s.speed*1.6+s.phase)*s.amp*.48;if(x===-20)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.strokeStyle="rgba("+s.color+","+(idx===0?.23:.17)+")";ctx.lineWidth=idx===0?1.6:1.2;ctx.shadowColor="rgba("+s.color+",.4)";ctx.shadowBlur=10;ctx.stroke();});ctx.shadowBlur=0;raf=window.requestAnimationFrame(draw);}
+resize();var timer;window.addEventListener("resize",function(){window.clearTimeout(timer);timer=window.setTimeout(resize,120);},{passive:true});document.addEventListener("visibilitychange",function(){if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;}else if(!raf)draw();});draw();}
 })();
