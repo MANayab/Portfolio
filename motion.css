@@ -72,3 +72,7 @@
   #projects.motion-demo-active .docu-app-window .app-export-row { animation: none !important; }
   .motion-button, .btn-primary::before, .btn-ghost::before { transition: none !important; }
 }
+
+/* Scroll-drawn career spine: composited scaleY overlay, never layout geometry. */
+#experience .experience-list::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--motion-orange), var(--motion-blue), var(--motion-yellow)); transform: scaleY(0); transform-origin: top center; opacity: .9; pointer-events: none; }
+#experience .experience-list.motion-timeline-active::after { transform: scaleY(var(--timeline-progress, 0)); }
