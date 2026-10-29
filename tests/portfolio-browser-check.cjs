@@ -85,7 +85,7 @@ const path = require('node:path');
       const navToggle = page.locator('#navToggle');
       assert.equal(await navToggle.count(), 1, 'Navigation toggle is missing');
       assert((await navToggle.textContent()).includes('Toggle navigation'), 'Navigation toggle has no accessible name');
-      assert(layout.cssHref && layout.cssHref.includes('styles.css?v=20261029-hardening'), 'Cache-busted local stylesheet is not active');
+      assert(layout.cssHref && layout.cssHref.includes('styles.css?v=20261029-perf'), 'Cache-busted local stylesheet is not active');
       const manifestResponse = await page.request.get(new URL('manifest.webmanifest', baseUrl).toString());
       assert(manifestResponse.ok(), 'Web manifest failed to load');
       const manifest = await manifestResponse.json();
