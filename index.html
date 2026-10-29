@@ -31,9 +31,7 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#080d18" />
 
-  <!-- Load display fonts without blocking the first paint; system fallbacks remain available immediately. -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" /></noscript>
+  <!-- System font stacks avoid third-party font requests and font-swap layout work. -->
 
   <link rel="stylesheet" href="styles.css?v=20261029-perf" />
 
