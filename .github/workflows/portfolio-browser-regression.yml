@@ -2,7 +2,7 @@ name: Portfolio browser regression
 
 on:
   push:
-    branches: [fix/mobile-dashboard-production, main]
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -44,7 +44,7 @@ jobs:
           retention-days: 14
 
   live-pages-regression:
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'pull_request'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: chromium-layout
     runs-on: ubuntu-latest
     timeout-minutes: 10
