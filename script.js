@@ -13,6 +13,22 @@ var counters=Array.prototype.slice.call(document.querySelectorAll("[data-count]"
 function count(el){if(el.dataset.counted)return;el.dataset.counted="1";var target=Number(el.getAttribute("data-count")),suffix=el.getAttribute("data-suffix")||"";if(!Number.isFinite(target))return;if(reduceMotion){el.textContent=String(target)+suffix;return;}var start=performance.now(),duration=650;function tick(now){var p=Math.min(1,(now-start)/duration);el.textContent=String(Math.round(target*(1-Math.pow(1-p,3))))+suffix;if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);}
 if(reduceMotion||!("IntersectionObserver"in window))counters.forEach(count);else{var co=new IntersectionObserver(function(entries,observer){entries.forEach(function(e){if(e.isIntersecting){count(e.target);observer.unobserve(e.target);}});},{threshold:.6});counters.forEach(function(el){co.observe(el);});}
 var typing=document.querySelector("[data-typing]");if(typing&&!reduceMotion){var phrase=typing.getAttribute("data-typing")||typing.textContent;typing.textContent="";var i=0;function type(){if(i>=phrase.length)return;typing.textContent+=phrase.charAt(i++);window.setTimeout(type,36);}window.setTimeout(type,240);}
+
+  // Subtle pointer glow; update once per animation frame on fine-pointer devices.
+  if (!reduceMotion && window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
+    var pointerPending = false, pointerX = 0, pointerY = 0;
+    window.addEventListener("pointermove", function (event) {
+      pointerX = event.clientX; pointerY = event.clientY;
+      if (pointerPending) return;
+      pointerPending = true;
+      window.requestAnimationFrame(function () {
+        document.documentElement.style.setProperty("--pointer-x", pointerX + "px");
+        document.documentElement.style.setProperty("--pointer-y", pointerY + "px");
+        pointerPending = false;
+      });
+    }, { passive: true });
+  }
+
 var canvas=document.getElementById("signalCanvas"),ctx=canvas&&canvas.getContext?canvas.getContext("2d",{alpha:true}):null;
 if(canvas&&ctx&&!reduceMotion){var width=0,height=0,dpr=1,frame=0,raf=0,streams=[{color:"255,106,42",y:.22,phase:.2,amp:22,speed:.00075},{color:"70,184,255",y:.48,phase:2.4,amp:30,speed:.00058},{color:"246,211,75",y:.73,phase:4.5,amp:18,speed:.00066}];
 function resize(){dpr=Math.min(window.devicePixelRatio||1,1.5);width=Math.max(1,window.innerWidth);height=Math.max(1,window.innerHeight);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.width=width+"px";canvas.style.height=height+"px";ctx.setTransform(dpr,0,0,dpr,0,0);}
