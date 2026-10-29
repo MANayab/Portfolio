@@ -79,20 +79,17 @@ jobs:
         run: node tests/portfolio-browser-check.cjs
       - name: Verify live /404 route and manifest URL
         run: |
-          status="$(curl --silent --show-error --output /tmp/portfolio-404.html --write-out '%{http_code}' https://manayab.github.io/Portfolio/404)"
-          echo "Live /Portfolio/404 HTTP status: $status"
-          if ! grep -q 'Page not found' /tmp/portfolio-404.html; then
-            echo "Live /Portfolio/404 did not return the custom 404 document; response preview:"
-            sed -n '1,40p' /tmp/portfolio-404.html
-            exit 1
-          fi
-          if [ "$status" != "404" ]; then
-            echo "Expected HTTP 404 from /Portfolio/404, received $status."
-            exit 1
-          fi
+          page_status="$(curl --silent --show-error --output /tmp/portfolio-404.html --write-out '%{http_code}' https://manayab.github.io/Portfolio/404)"
+          echo "Live /Portfolio/404 HTTP status: $page_status"
+          test "$page_status" = "200"
+          grep -q 'Page not found' /tmp/portfolio-404.html
+          missing_status="$(curl --silent --show-error --output /tmp/portfolio-missing-route.html --write-out '%{http_code}' https://manayab.github.io/Portfolio/this-route-must-not-exist-for-404-check)"
+          echo "Live missing-route HTTP status: $missing_status"
+          test "$missing_status" = "404"
+          grep -q 'Page not found' /tmp/portfolio-missing-route.html
           curl --silent --show-error --fail https://manayab.github.io/Portfolio/manifest.webmanifest -o /tmp/portfolio-manifest.webmanifest
           grep -q '"theme_color": "#080d18"' /tmp/portfolio-manifest.webmanifest
-          echo "Live manifest URL and theme color verified."
+          echo "Live /404 page, true missing-route 404 response, and manifest URL verified."
       - name: Upload live-site screenshots and metrics
         if: always()
         uses: actions/upload-artifact@v4
