@@ -1,67 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" width="900" height="220" role="img" aria-label="Animated pipeline: invoice PDF is parsed in the browser and exported as XLSX, CSV or JSON" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpiOTU4YTVkMC1kNzc4LTQyYzItODk2Yy01ZGMyODJiM2QzYjgAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaGtYm1fah9U8vWE/LKhmVaAAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpjNDYyZWY5Yy01ZjUwLTQ1NmUtODYwNS1kY2JkMzIxMWMwZTdscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNooPde+ivuH294apsCwdsbRQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggZ4lKxwZRaJTVOB2o9iNCuq+p+9//wJoSInRJtBmSRcqkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaASsjDEopfG7xuopbjryAiQAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIHJLTWdlWV184yJCegT+H17xGrgqK/Tvqi1xKStFYG7hZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQEIZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmI5NThhNWQwLWQ3NzgtNDJjMi04OTZjLTVkYzI4MmIzZDNiOC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjkyMTM0NmJlLTczNGUtNDJiNC05NzEzLTQ3ZTY4NTk1ZTFiYXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBniUrHBlFolNU4Haj2I0K6r6n73//AmhIidEm0GZJFyqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggpew9rwtaxlbDHM9fIGbhNi45Hef6iwjlnAos40veJDaiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggBsyCg8qWD0tW7qlxYhD/q4l6ySS4BgZGUqmtPNOLb5d0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQBLMBGQEglNO2tTRlf+kcLeVug6Bmpgy9sUZcQ4NyTuT9mMUF9DWvAUaAMzUvi2W52tusIlzth5hQLsFFbnPmFM=</c2pa:manifest></metadata>
-  <style>
-    .bg{fill:#F2EEE3}
-    .ink{stroke:#1C1B19;stroke-width:2;fill:#FBF9F3}
-    .mono{font-family:'DejaVu Sans Mono',Menlo,Consolas,monospace;font-size:13px;fill:#1C1B19}
-    .mute{fill:#5A564C}
-    .bar{fill:#CFC8B6}
-    .hit{fill:#F0B9A7}
-    .wire{stroke:#1C1B19;stroke-width:2;stroke-dasharray:6 6;fill:none;animation:dash 1.2s linear infinite}
-    @keyframes dash{to{stroke-dashoffset:-24}}
-    .scan{animation:scan 3.2s ease-in-out infinite}
-    @keyframes scan{0%{transform:translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(112px);opacity:0}}
-    .cell{opacity:0;animation:fill 3.2s steps(1,end) infinite}
-    .c1{animation-delay:1.6s}.c2{animation-delay:1.9s}.c3{animation-delay:2.2s}.c4{animation-delay:2.5s}
-    @keyframes fill{0%{opacity:0}1%{opacity:1}92%{opacity:1}100%{opacity:0}}
-    .tag{animation:blink 3.2s steps(1,end) infinite}
-    @keyframes blink{0%,40%{fill:#5A564C}41%,100%{fill:#C8431F}}
-    @media (prefers-reduced-motion:reduce){.wire,.scan,.cell,.tag{animation:none}.cell{opacity:1}}
-  </style>
-  <rect class="bg" width="900" height="220"/>
-  <!-- PDF -->
-  <g transform="translate(40,30)">
-    <rect x="6" y="6" width="130" height="150" fill="#1C1B19"/>
-    <rect class="ink" width="130" height="150"/>
-    <text class="mono" x="12" y="22" font-weight="700">INVOICE</text>
-    <rect class="hit" x="12" y="36" width="70" height="6"/>
-    <rect class="bar" x="12" y="50" width="46" height="6"/>
-    <rect class="bar" x="12" y="72" width="60" height="6"/><rect class="hit" x="90" y="72" width="26" height="6"/>
-    <rect class="bar" x="12" y="88" width="60" height="6"/><rect class="bar" x="90" y="88" width="26" height="6"/>
-    <rect class="bar" x="12" y="104" width="60" height="6"/><rect class="hit" x="90" y="104" width="26" height="6"/>
-    <rect class="scan" x="0" y="30" width="130" height="3" fill="#C8431F"/>
-    <text class="mono mute" x="65" y="178" text-anchor="middle">input.pdf</text>
-  </g>
-  <path class="wire" d="M190 105 H290"/>
-  <!-- Parser -->
-  <g transform="translate(300,55)">
-    <rect x="5" y="5" width="130" height="100" fill="#1C1B19"/>
-    <rect class="ink" width="130" height="100"/>
-    <text class="mono" x="65" y="30" text-anchor="middle" font-weight="700">browser</text>
-    <text class="mono mute" x="65" y="52" text-anchor="middle">pdf.js</text>
-    <text class="mono mute" x="65" y="70" text-anchor="middle">heuristics</text>
-    <text class="mono tag" x="65" y="90" text-anchor="middle">no upload</text>
-  </g>
-  <path class="wire" d="M440 105 H540"/>
-  <!-- XLSX -->
-  <g transform="translate(550,30)">
-    <rect x="6" y="6" width="150" height="150" fill="#1F6B45"/>
-    <rect x="0" y="0" width="150" height="150" fill="#fff" stroke="#1F6B45" stroke-width="2"/>
-    <rect width="150" height="26" fill="#DCEBDF"/>
-    <g class="mono" font-size="12" fill="#1F6B45" font-weight="700"><text x="12" y="17">SKU</text><text x="62" y="17">Qty</text><text x="102" y="17">Amt</text></g>
-    <g stroke="#BFD6C6"><path d="M0 52H150M0 78H150M0 104H150M0 130H150M50 0V150M96 0V150"/></g>
-    <g class="mono" font-size="12">
-      <g class="cell c1"><text x="12" y="44">A-12</text><text x="62" y="44">4</text><text x="102" y="44">240</text></g>
-      <g class="cell c2"><text x="12" y="70">B-07</text><text x="62" y="70">10</text><text x="102" y="70">980</text></g>
-      <g class="cell c3"><text x="12" y="96">C-31</text><text x="62" y="96">2</text><text x="102" y="96">410</text></g>
-      <g class="cell c4"><text x="62" y="122" font-weight="700">SUM</text><text x="102" y="122" font-weight="700" fill="#C8431F">4,820</text></g>
-    </g>
-    <text class="mono mute" x="75" y="178" text-anchor="middle">output.xlsx</text>
-  </g>
-  <!-- formats -->
-  <g class="mono" font-size="13">
-    <rect x="740" y="60" width="120" height="30" fill="#FBF9F3" stroke="#1C1B19" stroke-width="2"/><text x="800" y="80" text-anchor="middle">.xlsx</text>
-    <rect x="740" y="100" width="120" height="30" fill="#FBF9F3" stroke="#1C1B19" stroke-width="2"/><text x="800" y="120" text-anchor="middle">.csv</text>
-    <rect x="740" y="140" width="120" height="30" fill="#FBF9F3" stroke="#1C1B19" stroke-width="2"/><text x="800" y="160" text-anchor="middle">.json</text>
-  </g>
-  <path class="wire" d="M710 105 H735"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">DocuExtract invoice processing pipeline</title>
+  <desc id="desc">A text-based invoice PDF is processed locally in a browser, reviewed, and exported as XLSX, CSV, or JSON.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#1C1B19" stroke-opacity=".07"/></pattern>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FAF7EF"/><stop offset="1" stop-color="#E8E1D3"/></linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#47BAFF"/></marker>
+  </defs>
+  <rect width="960" height="600" fill="url(#paper)"/><rect width="960" height="600" fill="url(#grid)"/>
+  <path d="M0 118H960" stroke="#1C1B19" stroke-opacity=".16"/>
+  <text x="48" y="54" fill="#1C1B19" font-family="monospace" font-size="16" letter-spacing="2">DOCUEXTRACT / DATA PIPELINE</text>
+  <text x="48" y="82" fill="#5A564C" font-family="Arial,sans-serif" font-size="13">INVOICE PDF → REVIEW → STRUCTURED EXPORTS</text>
+  <rect x="760" y="36" width="150" height="32" rx="4" fill="#E5F4EC" stroke="#1F6B45" stroke-opacity=".4"/><circle cx="778" cy="52" r="4" fill="#1F6B45"/>
+  <text x="790" y="56" fill="#1F6B45" font-family="monospace" font-size="11">BROWSER-LOCAL</text>
+
+  <rect x="48" y="166" width="236" height="300" rx="10" fill="#F9F5EB" stroke="#C8431F" stroke-opacity=".6" stroke-width="1.5"/>
+  <rect x="68" y="188" width="52" height="62" rx="5" fill="#C8431F"/><path d="M82 204H106M82 215H106M82 226H99" stroke="#FFF6EC" stroke-width="2" stroke-linecap="round"/>
+  <text x="68" y="282" fill="#C8431F" font-family="monospace" font-size="11" letter-spacing="1.5">INPUT / 01</text>
+  <text x="68" y="312" fill="#1C1B19" font-family="Arial,sans-serif" font-size="23" font-weight="700">Invoice PDF</text>
+  <text x="68" y="342" fill="#5A564C" font-family="Arial,sans-serif" font-size="14">Text-based documents</text><path d="M68 365H264" stroke="#1C1B19" stroke-opacity=".15"/>
+  <rect x="68" y="385" width="196" height="48" rx="5" fill="#F2EEE3" stroke="#CFC8B6"/><text x="82" y="405" fill="#1C1B19" font-family="monospace" font-size="11">invoice.pdf</text><text x="82" y="421" fill="#5A564C" font-family="Arial,sans-serif" font-size="10">Selected for review</text>
+
+  <path d="M294 315H352" stroke="#47BAFF" stroke-width="2" marker-end="url(#arrow)"/><circle cx="321" cy="315" r="4" fill="#FFD34E"/>
+  <rect x="366" y="166" width="236" height="300" rx="10" fill="#101B2D" stroke="#47BAFF" stroke-opacity=".65" stroke-width="1.5"/>
+  <rect x="386" y="188" width="196" height="28" rx="4" fill="#192B43"/><circle cx="400" cy="202" r="3.5" fill="#FF6A24"/><circle cx="412" cy="202" r="3.5" fill="#FFD34E"/><circle cx="424" cy="202" r="3.5" fill="#47BAFF"/>
+  <text x="386" y="250" fill="#47BAFF" font-family="monospace" font-size="11" letter-spacing="1.5">PROCESS / 02</text><text x="386" y="280" fill="#F8F5ED" font-family="Arial,sans-serif" font-size="21" font-weight="700">Extract &amp; review</text>
+  <text x="386" y="309" fill="#C3BDB1" font-family="Arial,sans-serif" font-size="13">Structured invoice fields</text>
+  <rect x="386" y="332" width="196" height="30" rx="3" fill="#192B43"/><text x="398" y="351" fill="#C3BDB1" font-family="monospace" font-size="11">INVOICE NUMBER</text>
+  <rect x="386" y="369" width="196" height="30" rx="3" fill="#192B43"/><text x="398" y="388" fill="#C3BDB1" font-family="monospace" font-size="11">DATE / TOTAL / ITEMS</text>
+  <text x="386" y="434" fill="#FFD34E" font-family="monospace" font-size="11">REVIEW BEFORE EXPORT</text>
+
+  <path d="M612 315H670" stroke="#47BAFF" stroke-width="2" marker-end="url(#arrow)"/><circle cx="641" cy="315" r="4" fill="#FF6A24"/>
+  <rect x="684" y="166" width="228" height="300" rx="10" fill="#F9F5EB" stroke="#1F6B45" stroke-opacity=".5" stroke-width="1.5"/>
+  <text x="706" y="214" fill="#1F6B45" font-family="monospace" font-size="11" letter-spacing="1.5">OUTPUT / 03</text><text x="706" y="246" fill="#1C1B19" font-family="Arial,sans-serif" font-size="23" font-weight="700">Export formats</text>
+  <rect x="706" y="270" width="184" height="46" rx="5" fill="#E5F4EC" stroke="#1F6B45" stroke-opacity=".3"/><rect x="720" y="281" width="24" height="24" rx="3" fill="#1F6B45"/><text x="726" y="297" fill="#FFFFFF" font-family="monospace" font-size="10">X</text><text x="758" y="289" fill="#1C1B19" font-family="Arial,sans-serif" font-size="14" font-weight="700">XLSX</text><text x="758" y="304" fill="#5A564C" font-family="Arial,sans-serif" font-size="10">Full invoice</text>
+  <rect x="706" y="326" width="184" height="46" rx="5" fill="#E5F1FA" stroke="#47BAFF" stroke-opacity=".4"/><rect x="720" y="337" width="24" height="24" rx="3" fill="#1976B8"/><text x="726" y="353" fill="#FFFFFF" font-family="monospace" font-size="10">C</text><text x="758" y="345" fill="#1C1B19" font-family="Arial,sans-serif" font-size="14" font-weight="700">CSV</text><text x="758" y="360" fill="#5A564C" font-family="Arial,sans-serif" font-size="10">Line items</text>
+  <rect x="706" y="382" width="184" height="46" rx="5" fill="#FFF4D6" stroke="#D5A928" stroke-opacity=".6"/><rect x="720" y="393" width="24" height="24" rx="3" fill="#C09118"/><text x="726" y="409" fill="#FFFFFF" font-family="monospace" font-size="10">J</text><text x="758" y="401" fill="#1C1B19" font-family="Arial,sans-serif" font-size="14" font-weight="700">JSON</text><text x="758" y="416" fill="#5A564C" font-family="Arial,sans-serif" font-size="10">Full invoice</text>
+  <path d="M48 506H912" stroke="#1C1B19" stroke-opacity=".16"/><text x="48" y="540" fill="#5A564C" font-family="monospace" font-size="12" letter-spacing="1">NO BACKEND REQUIRED BY THE APP</text>
+  <text x="48" y="563" fill="#5A564C" font-family="Arial,sans-serif" font-size="12">Extraction is heuristic. Review data before accounting, tax, payment, or legal use.</text>
 </svg>
