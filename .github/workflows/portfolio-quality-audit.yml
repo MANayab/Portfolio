@@ -1,0 +1,79 @@
+name: Portfolio quality audit
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  accessibility-lighthouse-seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out proposed portfolio
+        uses: actions/checkout@v4
+      - name: Check out baseline before production hardening
+        uses: actions/checkout@v4
+        with:
+          ref: f02e8a1759c4756f796c87f9892a0fb69bce913d
+          path: baseline
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install audit tools
+        run: npm install --no-save playwright @axe-core/playwright lighthouse
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start baseline and proposed-site servers
+        run: |
+          mkdir -p artifacts
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory baseline > /tmp/portfolio-baseline.log 2>&1 &
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory . > /tmp/portfolio-current.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:4174/ >/dev/null && curl --silent --fail http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --silent --fail http://127.0.0.1:4174/ >/dev/null
+          curl --silent --fail http://127.0.0.1:4173/ >/dev/null
+      - name: Run axe accessibility audit at mobile, tablet and desktop sizes
+        run: node tests/portfolio-accessibility-audit.cjs
+      - name: Lighthouse before (baseline commit)
+        env:
+          CHROME_PATH: /home/runner/.cache/ms-playwright/chromium-1248/chrome-linux64/chrome
+        run: npx lighthouse http://127.0.0.1:4174/ --output=json --output=html --output-path=artifacts/lighthouse-before --chrome-flags="--headless --no-sandbox"
+      - name: Lighthouse after (proposed code)
+        env:
+          CHROME_PATH: /home/runner/.cache/ms-playwright/chromium-1248/chrome-linux64/chrome
+        run: npx lighthouse http://127.0.0.1:4173/ --output=json --output=html --output-path=artifacts/lighthouse-after --chrome-flags="--headless --no-sandbox"
+      - name: Summarize Lighthouse category scores and SEO metadata
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const report = name => JSON.parse(fs.readFileSync(`artifacts/${name}.report.json`, 'utf8'));
+          const summary = {};
+          for (const name of ['lighthouse-before', 'lighthouse-after']) {
+            const r = report(name);
+            summary[name] = {
+              url: r.finalDisplayedUrl,
+              scores: Object.fromEntries(['performance','accessibility','best-practices','seo'].map(k => [k, r.categories[k]?.score == null ? null : Math.round(r.categories[k].score * 100)])),
+              title: r.audits['document-title']?.score,
+              description: r.audits['meta-description']?.score,
+              canonical: r.audits['canonical']?.score,
+              h1: r.audits['heading-order']?.score
+            };
+          }
+          fs.writeFileSync('artifacts/lighthouse-summary.json', JSON.stringify(summary, null, 2));
+          console.log(JSON.stringify(summary, null, 2));
+          NODE
+      - name: Upload accessibility and Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-quality-audit-reports
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 14
