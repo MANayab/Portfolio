@@ -133,6 +133,7 @@ const path = require('node:path');
       const revealProbe = page.locator('#projects .project-card');
       await revealProbe.scrollIntoViewIfNeeded();
       await page.waitForFunction(() => { const el = document.querySelector('#projects .project-card'); return !!el && el.classList.contains('motion-visible'); }, null, { timeout: 3000 });
+      await page.waitForFunction(() => { const el = document.querySelector('#projects .project-card'); return !!el && getComputedStyle(el).opacity === '1'; }, null, { timeout: 3000 });
       const revealedProjectOpacity = await revealProbe.evaluate(el => getComputedStyle(el).opacity);
       assert.equal(revealedProjectOpacity, '1', 'Project card did not become visible after scrolling into view');
       await page.locator('img').evaluateAll(async images => {
