@@ -23,10 +23,10 @@
     var revealObserver = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add("motion-visible");
+        entry.target.classList.add("motion-visible", "is-visible");
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -32px 0px" });
+    }, { threshold: 0.01, rootMargin: "0px 0px -24px 0px" });
     revealItems.forEach(function (item) { revealObserver.observe(item); });
   } else {
     revealItems.forEach(function (item) { item.classList.add("motion-visible"); });
