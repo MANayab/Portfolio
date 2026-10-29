@@ -18,6 +18,31 @@ const path = require('node:path');
       const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height } });
       const page = await context.newPage();
       await page.goto(baseUrl, { waitUntil: 'networkidle' });
+
+      // Manual-style keyboard assertions complement axe's automated rules.
+      const mainTabIndex = await page.locator('main#main').getAttribute('tabindex');
+      if (mainTabIndex !== '-1') throw new Error('Skip-link target main#main must be programmatically focusable with tabindex="-1".');
+      await page.keyboard.press('Tab');
+      if (!(await page.evaluate(() => document.activeElement?.classList.contains('skip-link')))) {
+        throw new Error('First Tab must focus the visible-on-focus skip link.');
+      }
+      if (viewport.width <= 900) {
+        await page.keyboard.press('Tab'); // brand
+        await page.keyboard.press('Tab'); // menu toggle
+        const toggleFocused = await page.evaluate(() => document.activeElement?.id === 'navToggle');
+        if (!toggleFocused) throw new Error(`Expected mobile navigation toggle in keyboard order at ${viewport.width}px.`);
+        await page.keyboard.press('Tab');
+        const closedMenuLinkFocused = await page.evaluate(() => document.activeElement?.closest('#siteNav') !== null);
+        if (closedMenuLinkFocused) throw new Error(`Collapsed navigation links must not be keyboard-focusable at ${viewport.width}px.`);
+        await page.locator('#navToggle').focus();
+        await page.keyboard.press('Enter');
+        if (await page.locator('#navToggle').getAttribute('aria-expanded') !== 'true') throw new Error('Enter must open the mobile navigation and update aria-expanded.');
+        await page.keyboard.press('Tab');
+        if (!(await page.evaluate(() => document.activeElement?.closest('#siteNav a') !== null))) {
+          throw new Error('The first navigation link should be reachable after opening the mobile menu.');
+        }
+      }
+
       const scan = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice']).analyze();
       const summary = {
         viewport: viewport.name,
