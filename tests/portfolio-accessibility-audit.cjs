@@ -43,6 +43,12 @@ const path = require('node:path');
         }
       }
 
+      await page.locator('.skip-link').focus();
+      await page.keyboard.press('Enter');
+      if (!(await page.evaluate(() => document.activeElement?.id === 'main'))) {
+        throw new Error(`Activating the skip link must move focus to main#main at ${viewport.width}px.`);
+      }
+
       const scan = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice']).analyze();
       const summary = {
         viewport: viewport.name,
