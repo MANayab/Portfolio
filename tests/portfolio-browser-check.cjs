@@ -82,6 +82,21 @@ const path = require('node:path');
       assert(layout.description && layout.description.length > 50, 'Meta description is missing or too short');
       assert.equal(layout.headingCount, 1, 'Page should have exactly one H1');
       assert.deepEqual(layout.missingAnchors, [], 'Broken same-page anchor targets found');
+
+      const motionState = await page.evaluate(() => ({
+        progressExists: !!document.querySelector('.motion-progress'),
+        revealTargets: document.querySelectorAll('.motion-reveal').length,
+        hiddenUnrevealed: Array.from(document.querySelectorAll('.motion-reveal')).filter(el => getComputedStyle(el).opacity === '0').length,
+        motionScript: Array.from(document.scripts).some(el => el.src.includes('motion.js?v=20261030-motion')),
+        horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
+        navCurrentCount: document.querySelectorAll('#siteNav a[aria-current="true"]').length
+      }));
+      assert(motionState.motionScript, 'Motion script is not loaded');
+      assert(motionState.revealTargets > 8, 'Scroll-reveal targets were not registered');
+      assert.equal(motionState.horizontalOverflow, false, 'Motion system caused horizontal overflow');
+      assert(motionState.progressExists, 'Scroll progress indicator is missing when motion is enabled');
+      assert(motionState.hiddenUnrevealed < motionState.revealTargets, 'All reveal content is hidden rather than progressively revealed');
+
       const navToggle = page.locator('#navToggle');
       assert.equal(await navToggle.count(), 1, 'Navigation toggle is missing');
       assert((await navToggle.textContent()).includes('Toggle navigation'), 'Navigation toggle has no accessible name');
@@ -135,10 +150,16 @@ const path = require('node:path');
     assert(response && response.ok(), 'Reduced-motion page failed to load');
     const motion = await reduced.evaluate(() => ({
       canvasDisplay: getComputedStyle(document.querySelector('.signal-canvas')).display,
+      motionProgressDisplay: getComputedStyle(document.querySelector('.motion-progress')).display,
+      hiddenMotionContent: Array.from(document.querySelectorAll('.motion-reveal')).filter(el => getComputedStyle(el).opacity === '0').length,
+      revealCount: document.querySelectorAll('.motion-reveal').length,
       scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior,
       countValues: Array.from(document.querySelectorAll('[data-count]')).map(el => el.textContent.trim())
     }));
     assert.equal(motion.canvasDisplay, 'none', 'Signal canvas is active with reduced motion');
+    assert.equal(motion.motionProgressDisplay, 'none', 'Scroll progress animation is active with reduced motion');
+    assert.equal(motion.hiddenMotionContent, 0, 'Content is hidden with reduced motion');
+    assert(motion.revealCount > 8, 'Motion reveal targets are missing under reduced motion');
     assert.equal(motion.scrollBehavior, 'auto', 'Smooth scrolling remains active with reduced motion');
     assert(motion.countValues.every(value => value !== '0'), 'Counters remain unpopulated with reduced motion');
     await reduced.screenshot({ path: path.join(out, 'portfolio-390px-reduced-motion.png'), fullPage: true, animations: 'disabled' });
