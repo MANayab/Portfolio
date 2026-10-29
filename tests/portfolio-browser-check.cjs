@@ -60,7 +60,13 @@ const path = require('node:path');
           kpiLabel: rect('.kpi span'),
           navToggle: css('.nav-toggle'),
           cssHref: document.querySelector('link[href*="styles.css"]')?.href,
-          canonical: document.querySelector('link[rel="canonical"]')?.href
+          canonical: document.querySelector('link[rel="canonical"]')?.href,
+          title: document.title,
+          description: document.querySelector('meta[name="description"]')?.content,
+          missingAnchors: Array.from(document.querySelectorAll('a[href^="#"]'))
+            .map(link => link.getAttribute('href').slice(1))
+            .filter(id => id && !document.getElementById(id)),
+          headingCount: document.querySelectorAll('h1').length
         };
       });
       assert.equal(layout.documentWidth, viewport.width, `Horizontal overflow at ${viewport.name}px: ${layout.documentWidth}px`);
@@ -72,7 +78,17 @@ const path = require('node:path');
       assert.equal(layout.terminalStyle.fontFamily.includes('monospace') || layout.terminalStyle.fontFamily.includes('Plex Mono'), true,
         'Terminal output is not using a monospace font');
       assert.equal(layout.canonical, 'https://manayab.github.io/Portfolio/', 'Canonical URL changed');
-      assert(layout.cssHref && layout.cssHref.includes('styles.css?v=20261029-mobile-fix'), 'Cache-busted local stylesheet is not active');
+      assert(layout.title.length > 20, 'Document title is missing or too short');
+      assert(layout.description && layout.description.length > 50, 'Meta description is missing or too short');
+      assert.equal(layout.headingCount, 1, 'Page should have exactly one H1');
+      assert.deepEqual(layout.missingAnchors, [], 'Broken same-page anchor targets found');
+      assert(await page.getByRole('button', { name: 'Toggle navigation' }).count() === 1, 'Navigation toggle has no accessible name');
+      assert(layout.cssHref && layout.cssHref.includes('styles.css?v=20261029-hardening'), 'Cache-busted local stylesheet is not active');
+      const manifestResponse = await page.request.get(new URL('site.webmanifest', baseUrl).toString());
+      assert(manifestResponse.ok(), 'Web manifest failed to load');
+      const manifest = await manifestResponse.json();
+      assert.equal(manifest.theme_color, '#080d18', 'Manifest theme color does not match the site');
+      assert.equal(manifest.background_color, '#080d18', 'Manifest background color does not match the site');
       if (viewport.width <= 900) {
         assert(layout.statusLabel.bottom <= layout.statusValue.top + 1, 'System status label and value are glued together');
         assert(layout.kpiLabel.bottom <= layout.kpis.bottom, 'KPI label is not visible');
