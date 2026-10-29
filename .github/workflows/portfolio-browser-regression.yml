@@ -64,7 +64,7 @@ jobs:
           LIVE_URL: https://manayab.github.io/Portfolio/
         run: |
           for i in $(seq 1 60); do
-            if curl --silent --fail "$LIVE_URL" | grep -q 'styles.css?v=20261029-hardening' && curl --silent --fail "${LIVE_URL}assets/docuextract-pipeline.svg" | grep -q 'viewBox="0 0 960 600"'; then
+            if curl --silent --fail "$LIVE_URL" | grep -q 'styles.css?v=20261029-hardening' && curl --silent --fail "${LIVE_URL}assets/docuextract-pipeline.svg" | grep -q 'viewBox="0 0 960 600"' && curl --silent --fail "${LIVE_URL}manifest.webmanifest" | grep -q '"theme_color": "#080d18"'; then
               echo "Updated cache-busted assets are live."
               exit 0
             fi
@@ -77,6 +77,12 @@ jobs:
         env:
           PORTFOLIO_BASE_URL: https://manayab.github.io/Portfolio/
         run: node tests/portfolio-browser-check.cjs
+      - name: Verify live /404 route and manifest URL
+        run: |
+          curl --silent --show-error --output /tmp/portfolio-404.html --write-out '%{http_code}' https://manayab.github.io/Portfolio/404 > /tmp/portfolio-404-status.txt
+          test "$(cat /tmp/portfolio-404-status.txt)" = "404"
+          grep -q 'Page not found' /tmp/portfolio-404.html
+          curl --silent --show-error --fail https://manayab.github.io/Portfolio/manifest.webmanifest | grep -q '"theme_color": "#080d18"'
       - name: Upload live-site screenshots and metrics
         if: always()
         uses: actions/upload-artifact@v4
