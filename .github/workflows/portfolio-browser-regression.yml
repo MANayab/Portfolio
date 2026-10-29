@@ -64,14 +64,14 @@ jobs:
           LIVE_URL: https://manayab.github.io/Portfolio/
         run: |
           for i in $(seq 1 60); do
-            if curl --silent --fail "$LIVE_URL" | grep -q 'styles.css?v=20261029-hardening' && curl --silent --fail "${LIVE_URL}assets/docuextract-pipeline.svg" | grep -q 'viewBox="0 0 960 600"' && curl --silent --fail "${LIVE_URL}manifest.webmanifest" | grep -q '"theme_color": "#080d18"'; then
-              echo "Updated cache-busted assets are live."
+            if curl --silent --fail "$LIVE_URL" | grep -q 'styles.css?v=20261029-perf' && curl --silent --fail "${LIVE_URL}assets/docuextract-pipeline.svg" | grep -q 'viewBox="0 0 960 600"' && curl --silent --fail "${LIVE_URL}manifest.webmanifest" | grep -q '"theme_color": "#080d18"' && curl --silent --fail "${LIVE_URL}social-preview.svg" | grep -q '<svg'; then
+              echo "Updated stylesheet, DocuExtract illustration, manifest, and social preview are live."
               exit 0
             fi
             echo "Waiting for Pages deployment ($i/60)..."
             sleep 10
           done
-          echo "Timed out waiting for updated GitHub Pages HTML."
+          echo "Timed out waiting for current stylesheet, DocuExtract illustration, manifest, and social preview on GitHub Pages."
           exit 1
       - name: Verify the live Pages site in Chromium
         env:

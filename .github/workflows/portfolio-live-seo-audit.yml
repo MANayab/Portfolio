@@ -24,9 +24,23 @@ jobs:
   live-seo:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
     steps:
       - name: Check out audit
         uses: actions/checkout@v4
+      - name: Wait for deployed social preview metadata and artwork
+        env:
+          LIVE_URL: https://manayab.github.io/Portfolio/
+        run: |
+          for i in $(seq 1 60); do
+            if curl --silent --show-error --fail "$LIVE_URL" | grep -Fq 'og:image" content="https://manayab.github.io/Portfolio/social-preview.svg' && curl --silent --show-error --fail "${LIVE_URL}social-preview.svg" | grep -q '<svg'; then
+              echo "Deployed social preview metadata and SVG artwork are live."
+              exit 0
+            fi
+            echo "Waiting for Pages deployment to publish social preview metadata and artwork ($i/60)..."
+            sleep 10
+          done
+          echo "Timed out waiting for the deployed social preview metadata and artwork."
+          exit 1
       - name: Verify deployed Pages sitemap, robots, structured data and social metadata
         run: python3 tests/portfolio-live-seo-audit.py
