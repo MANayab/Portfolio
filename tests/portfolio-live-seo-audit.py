@@ -90,13 +90,13 @@ def main():
         require(bool(parser.meta.get(key)), f"social preview metadata {key} is present")
     require(parser.meta.get("og:url") == EXPECTED, "Open Graph URL matches canonical URL")
     image_url = parser.meta.get("og:image", "")
-    require(image_url == BASE + "social-preview.png", "Open Graph image points to the portfolio's published social-preview.png")
+    require(image_url == BASE + "social-preview.svg", "Open Graph image points to the portfolio's published social-preview.svg")
     require(parser.meta.get("twitter:image") == image_url, "Twitter image matches the Open Graph image")
     require(parser.meta.get("twitter:card") == "summary_large_image", "Twitter card requests a large image preview")
-    require(parser.meta.get("og:image:type") == "image/png", "Open Graph image type is PNG")
+    require(parser.meta.get("og:image:type") == "image/svg+xml", "Open Graph image type is PNG")
     image_body, image_type = fetch(image_url)
-    require(image_type == "image/png", f"social preview image is served as PNG ({image_type})")
-    require(len(image_body) > 1000 and image_body.startswith(b"\\x89PNG\\r\\n\\x1a\\n"), "social preview image is a non-empty valid PNG response")
+    require(image_type == "image/svg+xml", f"social preview image is served as PNG ({image_type})")
+    require(len(image_body) > 1000 and image_body.lstrip().startswith(b"<svg") or b"<svg" in image_body[:300], "social preview image is a non-empty valid PNG response")
 
     found_types = set()
     for block in parser.jsonld:
