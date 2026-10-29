@@ -93,10 +93,10 @@ def main():
     require(image_url == BASE + "social-preview.svg", "Open Graph image points to the portfolio's published social-preview.svg")
     require(parser.meta.get("twitter:image") == image_url, "Twitter image matches the Open Graph image")
     require(parser.meta.get("twitter:card") == "summary_large_image", "Twitter card requests a large image preview")
-    require(parser.meta.get("og:image:type") == "image/svg+xml", "Open Graph image type is PNG")
+    require(parser.meta.get("og:image:type") == "image/svg+xml", "Open Graph image type is SVG")
     image_body, image_type = fetch(image_url)
-    require(image_type == "image/svg+xml", f"social preview image is served as PNG ({image_type})")
-    require(len(image_body) > 1000 and image_body.lstrip().startswith(b"<svg") or b"<svg" in image_body[:300], "social preview image is a non-empty valid PNG response")
+    require(image_type == "image/svg+xml", f"social preview image is served as SVG ({image_type})")
+    require(len(image_body) > 1000 and (image_body.lstrip().startswith(b"<svg") or b"<svg" in image_body[:300]), "social preview image contains an SVG document")
 
     found_types = set()
     for block in parser.jsonld:
