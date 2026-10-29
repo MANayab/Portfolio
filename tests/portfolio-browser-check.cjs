@@ -59,7 +59,7 @@ const path = require('node:path');
           kpiStyle: css('.kpi-strip'),
           kpiLabel: rect('.kpi span'),
           navToggle: css('.nav-toggle'),
-          cssHref: document.querySelector('link[rel="stylesheet"]')?.href,
+          cssHref: document.querySelector('link[href*="styles.css"]')?.href,
           canonical: document.querySelector('link[rel="canonical"]')?.href
         };
       });
@@ -72,6 +72,7 @@ const path = require('node:path');
       assert.equal(layout.terminalStyle.fontFamily.includes('monospace') || layout.terminalStyle.fontFamily.includes('Plex Mono'), true,
         'Terminal output is not using a monospace font');
       assert.equal(layout.canonical, 'https://manayab.github.io/Portfolio/', 'Canonical URL changed');
+      assert(layout.cssHref && layout.cssHref.includes('styles.css?v=20261029-mobile-fix'), 'Cache-busted local stylesheet is not active');
       if (viewport.width <= 900) {
         assert(layout.statusLabel.bottom <= layout.statusValue.top + 1, 'System status label and value are glued together');
         assert(layout.kpiLabel.bottom <= layout.kpis.bottom, 'KPI label is not visible');
@@ -82,6 +83,16 @@ const path = require('node:path');
         assert.equal(await page.locator('#navToggle').getAttribute('aria-expanded'), 'false', 'Mobile nav did not close');
       }
       await page.screenshot({ path: path.join(out, `portfolio-${viewport.name}px-viewport.png`), fullPage: false, animations: 'disabled' });
+      await page.evaluate(async () => {
+        const step = Math.max(320, Math.floor(window.innerHeight * 0.8));
+        const maxY = document.documentElement.scrollHeight;
+        for (let y = 0; y < maxY; y += step) {
+          window.scrollTo(0, y);
+          await new Promise(resolve => setTimeout(resolve, 90));
+        }
+        window.scrollTo(0, 0);
+      });
+      await page.waitForTimeout(700);
       await page.screenshot({ path: path.join(out, `portfolio-${viewport.name}px.png`), fullPage: true, animations: 'disabled' });
       fs.writeFileSync(path.join(out, `metrics-${viewport.name}px.json`), JSON.stringify(layout, null, 2));
       console.log(`PASS ${viewport.name}px: ${JSON.stringify({ documentWidth: layout.documentWidth, hero: layout.hero, status: layout.status, cssHref: layout.cssHref })}`);
