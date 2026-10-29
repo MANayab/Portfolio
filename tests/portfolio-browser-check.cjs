@@ -146,6 +146,7 @@ const path = require('node:path');
     const reduced = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await reduced.emulateMedia({ reducedMotion: 'reduce' });
     reduced.on('pageerror', error => failures.push(`[reduced-motion] pageerror: ${error.message}`));
+    reduced.on('console', message => { if (message.type() === 'error') failures.push(`[reduced-motion] console: ${message.text()}`); });
     const response = await reduced.goto(baseUrl, { waitUntil: 'networkidle' });
     assert(response && response.ok(), 'Reduced-motion page failed to load');
     const motion = await reduced.evaluate(() => ({
