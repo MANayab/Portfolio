@@ -2,6 +2,7 @@
 """Live production SEO smoke test for the GitHub Pages portfolio."""
 import json
 import sys
+from pathlib import Path
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -75,9 +76,14 @@ def collect_types(value, found):
         for child in value:
             collect_types(child, found)
 
-def main():
-    raw, content_type = fetch(BASE)
-    require(content_type == "text/html", f"live home page is HTML ({content_type})")
+def main(local=False):
+    if local:
+        raw = Path("index.html").read_bytes()
+        content_type = "text/html"
+        print("Checking proposed branch files locally before deployment")
+    else:
+        raw, content_type = fetch(BASE)
+    require(content_type == "text/html", f"home page is HTML ({content_type})")
     parser = PageParser()
     parser.feed(raw.decode("utf-8", errors="replace"))
     require(bool("".join(parser.title_parts).strip()), "document title is present")
@@ -94,7 +100,11 @@ def main():
     require(parser.meta.get("twitter:image") == image_url, "Twitter image matches the Open Graph image")
     require(parser.meta.get("twitter:card") == "summary_large_image", "Twitter card requests a large image preview")
     require(parser.meta.get("og:image:type") == "image/svg+xml", "Open Graph image type is SVG")
-    image_body, image_type = fetch(image_url)
+    if local:
+        image_body = Path("social-preview.svg").read_bytes()
+        image_type = "image/svg+xml"
+    else:
+        image_body, image_type = fetch(image_url)
     require(image_type == "image/svg+xml", f"social preview image is served as SVG ({image_type})")
     require(len(image_body) > 1000 and (image_body.lstrip().startswith(b"<svg") or b"<svg" in image_body[:300]), "social preview image contains an SVG document")
 
@@ -110,20 +120,26 @@ def main():
         require(typ in found_types, f"structured data includes {typ}")
 
     sitemap_url = BASE + "sitemap.xml"
-    sitemap_body, sitemap_type = fetch(sitemap_url)
+    if local:
+        sitemap_body = Path("sitemap.xml").read_bytes()
+    else:
+        sitemap_body, sitemap_type = fetch(sitemap_url)
     root = ET.fromstring(sitemap_body)
     locs = [node.text.strip() for node in root.iter() if node.tag.endswith("loc") and node.text]
     require(root.tag.endswith("urlset"), "sitemap.xml has a urlset root")
     require(EXPECTED in locs, "sitemap includes the canonical portfolio URL")
 
-    robots_body, _ = fetch(BASE + "robots.txt")
+    if local:
+        robots_body = Path("robots.txt").read_bytes()
+    else:
+        robots_body, _ = fetch(BASE + "robots.txt")
     robots = robots_body.decode("utf-8", errors="replace")
     require(any(line.strip().lower() == "user-agent: *" for line in robots.splitlines()), "robots.txt has a global user-agent rule")
     require(any(line.strip() == f"Sitemap: {sitemap_url}" for line in robots.splitlines()), "robots.txt points to the live sitemap")
-    print("LIVE SEO AUDIT PASSED")
+    print("LOCAL SEO AUDIT PASSED" if local else "LIVE SEO AUDIT PASSED")
 if __name__ == "__main__":
     try:
-        main()
+        main(local="--local" in sys.argv[1:])
     except (AssertionError, urllib.error.URLError, TimeoutError, ET.ParseError) as exc:
         print(f"FAIL {exc}", file=sys.stderr)
         sys.exit(1)
