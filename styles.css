@@ -1579,3 +1579,16 @@ body.has-cursor-glow .cursor-glow {
 @media (prefers-reduced-motion: reduce) {
   .site-nav { transition: none !important; }
 }
+
+
+/* 404 page shares the main site's responsive container and design tokens. */
+.not-found-page {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding-block: 3rem;
+}
+.not-found-copy { max-width: 48ch; }
