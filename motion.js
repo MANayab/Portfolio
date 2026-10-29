@@ -11,7 +11,7 @@
   var nav = document.getElementById("siteNav");
   var links = nav ? Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]')) : [];
   var sections = links.map(function (link) { return document.getElementById(link.getAttribute("href").slice(1)); }).filter(Boolean);
-  var revealSelector = "main > section:not(.hero) .section-head, .experience-item, .progress-step, .project-card, .skill-chip, .language-chip, .travel-place, .education-item, .focus-lane";
+  var revealSelector = "main > section:not(.hero) .section-head, .experience-item, .progress-step, .project-card, .expertise-item, .language-chip, .travel-place, .education-item, .focus-lane";
   var revealItems = Array.prototype.slice.call(document.querySelectorAll(revealSelector));
   revealItems.forEach(function (item, index) {
     item.classList.add("motion-reveal");
