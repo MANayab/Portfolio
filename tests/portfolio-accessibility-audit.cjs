@@ -15,7 +15,8 @@ const path = require('node:path');
       { name: '768', width: 768, height: 1024 },
       { name: '1440', width: 1440, height: 1000 }
     ]) {
-      const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } });
+      const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height } });
+      const page = await context.newPage();
       await page.goto(baseUrl, { waitUntil: 'networkidle' });
       const scan = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice']).analyze();
       const summary = {
@@ -28,7 +29,7 @@ const path = require('node:path');
       };
       results.push(summary);
       console.log(JSON.stringify({ viewport: summary.viewport, passes: summary.passes, violations: summary.violations.map(v => ({ id: v.id, impact: v.impact, help: v.help, nodes: v.nodes.length })) }));
-      await page.close();
+      await context.close();
     }
     fs.writeFileSync(path.join(out, 'axe-accessibility-results.json'), JSON.stringify(results, null, 2));
     const serious = results.flatMap(r => r.violations).filter(v => v.impact === 'critical' || v.impact === 'serious');
