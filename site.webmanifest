@@ -5,8 +5,8 @@
   "start_url": "/Portfolio/",
   "scope": "/Portfolio/",
   "display": "standalone",
-  "background_color": "#0F2438",
-  "theme_color": "#0F2438",
+  "background_color": "#080d18",
+  "theme_color": "#080d18",
   "lang": "en",
   "icons": [
     {

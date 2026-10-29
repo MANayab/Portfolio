@@ -60,7 +60,13 @@ const path = require('node:path');
           kpiLabel: rect('.kpi span'),
           navToggle: css('.nav-toggle'),
           cssHref: document.querySelector('link[href*="styles.css"]')?.href,
-          canonical: document.querySelector('link[rel="canonical"]')?.href
+          canonical: document.querySelector('link[rel="canonical"]')?.href,
+          title: document.title,
+          description: document.querySelector('meta[name="description"]')?.content,
+          missingAnchors: Array.from(document.querySelectorAll('a[href^="#"]'))
+            .map(link => link.getAttribute('href').slice(1))
+            .filter(id => id && !document.getElementById(id)),
+          headingCount: document.querySelectorAll('h1').length
         };
       });
       assert.equal(layout.documentWidth, viewport.width, `Horizontal overflow at ${viewport.name}px: ${layout.documentWidth}px`);
@@ -72,7 +78,19 @@ const path = require('node:path');
       assert.equal(layout.terminalStyle.fontFamily.includes('monospace') || layout.terminalStyle.fontFamily.includes('Plex Mono'), true,
         'Terminal output is not using a monospace font');
       assert.equal(layout.canonical, 'https://manayab.github.io/Portfolio/', 'Canonical URL changed');
-      assert(layout.cssHref && layout.cssHref.includes('styles.css?v=20261029-mobile-fix'), 'Cache-busted local stylesheet is not active');
+      assert(layout.title.length > 20, 'Document title is missing or too short');
+      assert(layout.description && layout.description.length > 50, 'Meta description is missing or too short');
+      assert.equal(layout.headingCount, 1, 'Page should have exactly one H1');
+      assert.deepEqual(layout.missingAnchors, [], 'Broken same-page anchor targets found');
+      const navToggle = page.locator('#navToggle');
+      assert.equal(await navToggle.count(), 1, 'Navigation toggle is missing');
+      assert((await navToggle.textContent()).includes('Toggle navigation'), 'Navigation toggle has no accessible name');
+      assert(layout.cssHref && layout.cssHref.includes('styles.css?v=20261029-hardening'), 'Cache-busted local stylesheet is not active');
+      const manifestResponse = await page.request.get(new URL('manifest.webmanifest', baseUrl).toString());
+      assert(manifestResponse.ok(), 'Web manifest failed to load');
+      const manifest = await manifestResponse.json();
+      assert.equal(manifest.theme_color, '#080d18', 'Manifest theme color does not match the site');
+      assert.equal(manifest.background_color, '#080d18', 'Manifest background color does not match the site');
       if (viewport.width <= 900) {
         assert(layout.statusLabel.bottom <= layout.statusValue.top + 1, 'System status label and value are glued together');
         assert(layout.kpiLabel.bottom <= layout.kpis.bottom, 'KPI label is not visible');
@@ -125,6 +143,19 @@ const path = require('node:path');
     fs.writeFileSync(path.join(out, 'metrics-reduced-motion.json'), JSON.stringify(motion, null, 2));
     await reduced.close();
 
+    const notFoundPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    notFoundPage.on('pageerror', error => failures.push(`[404-page] pageerror: ${error.message}`));
+    notFoundPage.on('console', message => { if (message.type() === 'error') failures.push(`[404-page] console: ${message.text()}`); });
+    const notFoundResponse = await notFoundPage.goto(new URL('404.html', baseUrl).toString(), { waitUntil: 'networkidle' });
+    assert(notFoundResponse && notFoundResponse.ok(), 'Custom 404.html document failed to load');
+    assert.equal(await notFoundPage.title(), 'Page not found | Mohammed Abdul Nayab', 'Custom 404 page title mismatch');
+    assert.equal(await notFoundPage.locator('main.not-found-page').count(), 1, 'Custom 404 page container classes are missing');
+    assert.equal(await notFoundPage.locator('h1').textContent(), 'Page not found', 'Custom 404 heading missing');
+    const notFoundStyle = await notFoundPage.locator('.not-found-page').evaluate(el => ({ display: getComputedStyle(el).display, paddingTop: getComputedStyle(el).paddingTop }));
+    assert.equal(notFoundStyle.display, 'flex', 'Custom 404 responsive styles are not applied');
+    assert.notEqual(notFoundStyle.paddingTop, '0px', 'Custom 404 vertical spacing is missing');
+    await notFoundPage.screenshot({ path: path.join(out, 'portfolio-404-page.png'), fullPage: true, animations: 'disabled' });
+    await notFoundPage.close();
     if (failures.length) {
       console.error(failures.join('\n'));
       process.exitCode = 1;
