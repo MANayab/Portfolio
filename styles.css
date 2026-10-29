@@ -1400,3 +1400,48 @@ body.has-cursor-glow .cursor-glow { position: fixed; inset: 0; z-index: -1; poin
 @keyframes signal-sweep { from { transform: scaleX(0); } to { transform: scaleX(.72); } }
 @media (max-width: 520px) { .focus-lane { grid-template-columns: minmax(0,1fr) 38px; gap: .65rem; } .signal-track { grid-column: 1 / -1; grid-row: 2; } .lane-code { grid-column: 2; grid-row: 1; } }
 @media (prefers-reduced-motion: reduce) { .signal-track i { transform: scaleX(.55); animation: none !important; } }
+
+
+/* Cyber dashboard finishing pass: vivid orange + animated signal streams */
+:root {
+  --ink-900: #070b12;
+  --ink-800: #080f1c;
+  --ink-700: #101b2d;
+  --ink-600: #192b43;
+  --brass: #ff6a24;
+  --brass-bright: #ff8748;
+  --cyan: #47baff;
+  --yellow: #ffd34e;
+  --focus: #ffe36e;
+  --content-w: 1240px;
+}
+body {
+  background-color: var(--ink-800);
+  background-image:
+    radial-gradient(1000px 560px at 84% -8%, rgba(71,186,255,.10), transparent 62%),
+    radial-gradient(850px 480px at -8% 24%, rgba(255,106,36,.10), transparent 58%),
+    linear-gradient(rgba(116,157,203,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116,157,203,.035) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+  isolation: isolate;
+}
+.signal-canvas {
+  position: fixed; inset: 0; z-index: 0; display: block;
+  width: 100%; height: 100%; pointer-events: none; opacity: .7;
+}
+.site-header, main, .site-footer { position: relative; z-index: 1; }
+.site-header { background: rgba(7,11,19,.9); border-bottom-color: rgba(71,186,255,.22); }
+.brand-mark { filter: drop-shadow(0 0 9px rgba(255,106,36,.4)); }
+.hero-kicker .status-dot { box-shadow: 0 0 12px rgba(78,224,160,.7); }
+.status-panel, .ops-focus, .ops-route, .project-card, .contact-panel {
+  border-color: rgba(106,151,204,.38);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 16px 48px rgba(0,0,0,.2);
+}
+.btn-primary { background: var(--brass); border-color: var(--brass); color: #111722; }
+.btn-primary:hover { background: var(--brass-bright); border-color: var(--brass-bright); }
+body.has-cursor-glow .cursor-glow {
+  z-index: 0;
+  background: radial-gradient(320px circle at var(--pointer-x) var(--pointer-y), rgba(255,106,36,.065), transparent 72%);
+}
+@media (max-width: 680px) { .signal-canvas { opacity: .32; } }
+@media (prefers-reduced-motion: reduce) { .signal-canvas { display: none; } }
