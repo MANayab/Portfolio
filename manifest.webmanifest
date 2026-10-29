@@ -1,0 +1,19 @@
+{
+  "name": "Mohammed Abdul Nayab — Operations & Administration Professional",
+  "short_name": "M. A. Nayab",
+  "description": "Portfolio of Mohammed Abdul Nayab, an operations, administration and CRM professional based in Hyderabad, India, with international experience across India, the UAE and Canada.",
+  "start_url": "/Portfolio/",
+  "scope": "/Portfolio/",
+  "display": "standalone",
+  "background_color": "#080d18",
+  "theme_color": "#080d18",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
