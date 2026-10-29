@@ -159,7 +159,7 @@ const path = require('node:path');
     assert(response && response.ok(), 'Reduced-motion page failed to load');
     const motion = await reduced.evaluate(() => ({
       canvasDisplay: getComputedStyle(document.querySelector('.signal-canvas')).display,
-      motionProgressDisplay: getComputedStyle(document.querySelector('.motion-progress')).display,
+      motionProgressDisplay: document.querySelector('.motion-progress') ? getComputedStyle(document.querySelector('.motion-progress')).display : 'none',
       hiddenMotionContent: Array.from(document.querySelectorAll('.motion-reveal')).filter(el => getComputedStyle(el).opacity === '0').length,
       revealCount: document.querySelectorAll('.motion-reveal').length,
       scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior,
