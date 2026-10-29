@@ -60,7 +60,18 @@
 
   var timeline = document.querySelector("#experience .experience-list");
   if (timeline && !reduced && "IntersectionObserver" in window) {
-    timeline.classList.add("experience-timeline");
+    timeline.classList.add("motion-timeline-active");
+    var timelineSection = document.getElementById("experience");
+    function updateTimeline() {
+      if (!timelineSection) return;
+      var rect = timelineSection.getBoundingClientRect();
+      var span = Math.max(1, rect.height - window.innerHeight * 0.35);
+      var progressValue = Math.min(1, Math.max(0, (window.innerHeight * 0.7 - rect.top) / span));
+      timeline.style.setProperty("--timeline-progress", progressValue.toFixed(3));
+    }
+    window.addEventListener("scroll", updateTimeline, { passive: true });
+    window.addEventListener("resize", updateTimeline, { passive: true });
+    updateTimeline();
   }
 
   if (finePointer && !reduced) {
