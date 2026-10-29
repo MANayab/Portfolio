@@ -1566,12 +1566,19 @@ body.has-cursor-glow .cursor-glow {
     z-index: 110;
     max-height: 0;
     overflow: hidden;
+    visibility: hidden;
+    transition: max-height .2s ease, visibility 0s linear .2s;
     background: rgba(7, 11, 19, .98);
     border-bottom: 1px solid var(--line-strong);
     box-shadow: 0 18px 35px rgba(0,0,0,.32);
     transition: max-height .2s ease;
   }
-  .site-nav.is-open { max-height: min(80vh, 34rem); overflow-y: auto; }
+  .site-nav.is-open {
+    max-height: min(80vh, 34rem);
+    overflow-y: auto;
+    visibility: visible;
+    transition: max-height .2s ease, visibility 0s;
+  }
   .site-nav ul { display: flex; flex-direction: column; gap: 0; padding: .5rem var(--gutter) 1rem; }
   .site-nav li { border-bottom: 1px solid var(--line); }
   .site-nav a { display: block; padding: .7rem .1rem; font-size: .82rem; white-space: normal; }
