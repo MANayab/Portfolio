@@ -30,10 +30,10 @@
 }
 #experience .experience-item.motion-visible::before { opacity: 1; transform: scale(1); transition: opacity 360ms ease, transform 360ms ease; }
 @media (hover: hover) and (pointer: fine) {
-  .project-card, .ops-focus, .ops-route, .experience-item, .skill-chip, .language-chip, .travel-place {
+  .project-card, .ops-focus, .ops-route, .experience-item, .expertise-item, .language-chip, .travel-place {
     transition: transform 220ms ease, opacity 220ms ease;
   }
-  .project-card:hover, .ops-focus:hover, .ops-route:hover, .experience-item:hover, .skill-chip:hover, .language-chip:hover, .travel-place:hover {
+  .project-card:hover, .ops-focus:hover, .ops-route:hover, .experience-item:hover, .expertise-item:hover, .language-chip:hover, .travel-place:hover {
     transform: translate3d(0,-3px,0);
   }
   .motion-button { transition: transform 180ms ease, opacity 180ms ease; }
@@ -56,8 +56,8 @@
 #projects.motion-demo-active .docu-app-window .app-export-row { animation: docu-flow-in 460ms 200ms ease both; }
 @keyframes docu-flow-in { from { opacity: .35; transform: translate3d(0,8px,0); } to { opacity: 1; transform: translate3d(0,0,0); } }
 @media (hover: none), (pointer: coarse) {
-  .project-card, .ops-focus, .ops-route, .experience-item, .skill-chip, .language-chip, .travel-place,
-  .project-card:hover, .ops-focus:hover, .ops-route:hover, .experience-item:hover, .skill-chip:hover, .language-chip:hover, .travel-place:hover {
+  .project-card, .ops-focus, .ops-route, .experience-item, .expertise-item, .language-chip, .travel-place,
+  .project-card:hover, .ops-focus:hover, .ops-route:hover, .experience-item:hover, .expertise-item:hover, .language-chip:hover, .travel-place:hover {
     transform: none !important;
   }
 }
