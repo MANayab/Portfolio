@@ -23,12 +23,13 @@
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="color-scheme" content="dark" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="twitter:title" content="Mohammed Abdul Nayab | Operations, Administration & CRM Professional" />
   <meta name="twitter:description" content="Operations, administration and CRM professional based in Hyderabad, India, with professional experience in India and the UAE and travel experience in Canada." />
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#11100f" />
+  <meta name="theme-color" content="#080d18" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -200,13 +201,13 @@
       </button>
       <nav class="site-nav" id="siteNav" aria-label="Primary">
         <ul>
+          <li><a href="#top">Dashboard</a></li>
+          <li><a href="#ops-dashboard">Operations</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#expertise">Expertise</a></li>
           <li><a href="#experience">Experience</a></li>
-          <li><a href="#progression">Progression</a></li>
-          <li><a href="#international">Canada travel</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#education">Education</a></li>
+          <li><a href="#expertise">Skills</a></li>
+          <li><a href="#projects">DocuExtract</a></li>
+          <li><a href="#international">Travel</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -215,46 +216,75 @@
 
   <main id="main">
 
-    <!-- HERO -->
-    <section class="hero" id="top" aria-labelledby="hero-heading">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow hero-kicker">Hyderabad, Telangana, India</p>
-          <h1 id="hero-heading">Mohammed Abdul Nayab</h1>
-          <p class="hero-role">Operations · Administration · CRM &amp; Reporting</p>
-          <p class="hero-summary">
-            Operations and CRM professional experienced in administration, reporting and workflow coordination, now building practical browser-based software. Creator of DocuExtract, an invoice PDF extraction tool designed to help users review and export structured data.
-          </p>
-          <ul class="hero-meta">
-            <li><span aria-hidden="true">✉</span> <a href="mailto:manayab2@gmail.com">manayab2@gmail.com</a></li>
-            <li><span aria-hidden="true">☎</span> <a href="tel:+917330240053">+91 733 024 0053</a></li>
-            <li><span aria-hidden="true">⚑</span> Hyderabad, Telangana, India</li>
-          </ul>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#contact">Get in touch</a>
-            <a class="btn btn-ghost" href="#experience">View experience</a>
-            <a class="btn btn-ghost" href="https://github.com/MANayab" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
-          </div>
+    <!-- DASHBOARD HERO -->
+    <section class="hero dashboard-hero" id="top" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="dashboard-topline">
+          <span class="eyebrow"><span class="status-dot" aria-hidden="true"></span> PERSONAL SYSTEM / PROFILE 01</span>
+          <span class="mono muted">BUILD: PORTFOLIO // 2026</span>
         </div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow hero-kicker">Hyderabad, Telangana, India</p>
+            <p class="terminal-line"><span aria-hidden="true">guest@nayab:~$</span> <span id="terminalText">whoami</span><span class="terminal-cursor" aria-hidden="true">▋</span></p>
+            <h1 id="hero-heading">Mohammed Abdul <span>Nayab</span></h1>
+            <p class="hero-role">OPERATIONS &amp; CRM / REPORTING <span class="role-divider">→</span> SOFTWARE BUILDER</p>
+            <p class="hero-summary">Operations experience meets practical software development. I build tools that turn real workflow problems into simpler, reviewable digital processes.</p>
+            <p class="bridge-line"><span class="bridge-mark" aria-hidden="true">↳</span> Operations expertise <span>→</span> software that solves real operational problems.</p>
+            <ul class="hero-meta">
+              <li><span aria-hidden="true">✉</span> <a href="mailto:manayab2@gmail.com">manayab2@gmail.com</a></li>
+              <li><span aria-hidden="true">☎</span> <a href="tel:+917330240053">+91 733 024 0053</a></li>
+              <li><span aria-hidden="true">⌖</span> Hyderabad, Telangana, India</li>
+            </ul>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#projects">Explore DocuExtract <span aria-hidden="true">↗</span></a>
+              <a class="btn btn-ghost" href="#experience">Operations experience</a>
+              <a class="btn btn-ghost" href="https://github.com/MANayab" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
+            </div>
+          </div>
+          <aside class="status-panel panel" aria-label="Current profile status">
+            <div class="panel-heading"><span><span class="status-dot" aria-hidden="true"></span> SYSTEM STATUS</span><span class="chip chip-blue">PROFILE ACTIVE</span></div>
+            <div class="status-main"><span class="status-label">CURRENT MODE</span><strong>Open to opportunities</strong><span class="status-sub">Operations · Administration · CRM · Reporting · Software</span></div>
+            <div class="status-grid">
+              <div><span class="status-label">BASE</span><strong>HYD / IN</strong></div>
+              <div><span class="status-label">BUILDING</span><strong>DocuExtract</strong></div>
+              <div><span class="status-label">APP TYPE</span><strong>Browser-first</strong></div>
+              <div><span class="status-label">STACK</span><strong>React / TS</strong></div>
+            </div>
+            <div class="terminal-output"><span class="terminal-prompt">›</span> profile initialized <span class="output-ok">[OK]</span><br><span class="terminal-prompt">›</span> operational experience loaded <span class="output-ok">[OK]</span><br><span class="terminal-prompt">›</span> product build in progress <span class="output-warn">[ACTIVE]</span></div>
+          </aside>
+        </div>
+        <div class="kpi-strip" aria-label="Portfolio highlights">
+          <div class="kpi"><strong data-count="4">4</strong><span>EMPLOYERS IN PROFILE</span></div>
+          <div class="kpi kpi-blue"><strong data-count="5">5</strong><span>LANGUAGES</span></div>
+          <div class="kpi kpi-yellow"><strong data-count="10">10</strong><span>ONTARIO PLACES EXPLORED</span></div>
+          <div class="kpi"><strong data-count="3">3</strong><span>DOCUEXTRACT EXPORTS</span></div>
+        </div>
+      </div>
+    </section>
 
-        <div class="manifest-card" aria-hidden="true">
-          <div class="manifest-title">
-            <span>Operations Manifest</span>
-            <span>4+ YRS</span>
-          </div>
-          <div class="manifest-route">
-            <span class="stop">IND</span>
-            <span class="path"></span>
-            <span class="stop">UAE</span>
-            <span class="path"></span>
-            <span class="stop">DEV</span>
-          </div>
-          <div class="manifest-rows">
-            <div><span>Roles held</span><span>5</span></div>
-            <div><span>Countries worked in</span><span>2</span></div>
-            <div><span>Languages</span><span>5</span></div>
-            <div><span>Active since</span><span>2015</span></div>
-          </div>
+    <!-- OPERATIONS FIRST: EXPERIENCE IS IMMEDIATELY VISIBLE -->
+    <section class="ops-dashboard section-dashboard" id="ops-dashboard" aria-labelledby="ops-dashboard-heading">
+      <div class="container">
+        <div class="section-head dashboard-section-head">
+          <p class="eyebrow"><span class="section-index">01</span> OPERATIONS CONSOLE</p>
+          <h2 id="ops-dashboard-heading">Operations &amp; CRM / Reporting</h2>
+          <p class="section-intro">A career built around coordinating people, information and day-to-day workflows — across India and the UAE — now informing the software I build.</p>
+        </div>
+        <div class="ops-overview-grid">
+          <article class="panel ops-focus">
+            <div class="panel-heading"><span>CORE CAPABILITIES</span><span class="chip">OPS / CRM</span></div>
+            <h3>Keep the workflow moving.</h3>
+            <p>Administration, CRM handling, reporting, scheduling support, client coordination and operational follow-through.</p>
+            <div class="capability-tags"><span>CRM &amp; reporting</span><span>Workflow coordination</span><span>Client handling</span><span>RTO / SLA support</span><span>Warehouse &amp; purchasing</span><span>Marketing operations</span></div>
+          </article>
+          <article class="panel ops-route">
+            <div class="panel-heading"><span>INTERNATIONAL WORK HISTORY</span><span class="chip chip-blue">IND ↔ UAE</span></div>
+            <div class="route-row"><span class="route-node"></span><div><strong>India</strong><p>Sales/marketing, business leads and CRM-related work</p></div><span class="route-tag">IN</span></div>
+            <div class="route-row"><span class="route-node route-node-blue"></span><div><strong>United Arab Emirates</strong><p>Purchasing, warehouse supervision, sales, administration and marketing</p></div><span class="route-tag">UAE</span></div>
+            <p class="route-note">See the full role-by-role timeline below. No performance metrics are assumed where the record does not provide them.</p>
+            <a class="text-link" href="#experience">View employment timeline <span aria-hidden="true">↘</span></a>
+          </article>
         </div>
       </div>
     </section>
@@ -554,6 +584,18 @@
           <p class="section-intro">From an everyday document problem to a shipped browser-based product. DocuExtract is the first release in my journey from operations workflows into practical software development.</p>
         </div>
         <article class="project-card">
+          <div class="docu-app-window" aria-label="Illustrative DocuExtract application window">
+            <div class="app-window-top"><span class="app-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>DOCUEXTRACT / WORKSPACE</span><span class="chip chip-green">LOCAL</span></div>
+            <div class="app-window-body">
+              <div class="app-sidebar"><span class="app-side-mark">D.</span><span class="app-side-active">▤</span><span>↗</span><span>⚙</span></div>
+              <div class="app-workspace"><div class="app-workspace-head"><div><span class="status-label">INVOICE WORKSPACE</span><strong>Review extracted data</strong></div><span class="chip chip-blue">PDF READY</span></div>
+                <div class="app-file-row"><span class="file-icon">PDF</span><div><strong>invoice_2026.pdf</strong><span>Text-based PDF · ready to review</span></div><span class="output-ok">✓</span></div>
+                <div class="app-data-table"><div><span>FIELD</span><span>EXTRACTED VALUE</span></div><div><span>Invoice number</span><b>INV-••••</b></div><div><span>Invoice date</span><b>Review required</b></div><div><span>Line items</span><b>Structured rows</b></div></div>
+                <div class="app-export-row"><span>EXPORT FORMAT</span><span class="export-pill">XLSX</span><span class="export-pill">CSV</span><span class="export-pill">JSON</span></div>
+              </div>
+            </div>
+            <p class="app-window-caption">ILLUSTRATIVE UI PREVIEW · EXAMPLE VALUES ARE PLACEHOLDERS</p>
+          </div>
           <div class="project-visual">
             <img src="assets/docuextract-pipeline.svg" alt="DocuExtract invoice processing pipeline showing PDF input, extraction and structured spreadsheet exports" loading="lazy" width="960" height="600" />
             <span class="project-index">PROJECT 01 / 01</span>
@@ -562,10 +604,11 @@
             <p class="eyebrow">Created by Mohammed Abdul Nayab</p>
             <h3>DocuExtract</h3>
             <p class="project-tagline">Invoice PDF to Excel, CSV &amp; JSON converter</p>
+            <p class="bridge-line project-bridge">Operations expertise <span>→</span> software that solves real operational problems.</p>
             <p>DocuExtract extracts structured information from invoice PDFs in the browser, lets users review the results, and exports data to common formats. It is built with React, TypeScript, Vite, pdf.js, ExcelJS and Zod.</p>
             <p class="project-privacy"><strong>Privacy approach:</strong> files are processed locally by the application code rather than uploaded to a DocuExtract backend. Extraction is heuristic, so users should review results before relying on them.</p>
             <ul class="project-highlights" aria-label="Product highlights"><li><strong>100 pages</strong><span>Maximum PDF length</span></li><li><strong>3 formats</strong><span>XLSX · CSV · JSON</span></li><li><strong>Local-first</strong><span>Processed in your browser</span></li></ul>
-            <div class="project-tags" aria-label="Technologies"><span>React</span><span>TypeScript</span><span>Vite</span><span>pdf.js</span><span>ExcelJS</span><span>Zod</span></div>
+            <div class="project-tags" aria-label="Technologies"><span>React 18</span><span>TypeScript</span><span>Vite</span><span>pdf.js</span><span>ExcelJS</span><span>Zod</span><span>Tailwind CSS</span></div>
             <div class="project-actions">
               <a class="btn btn-primary" href="https://manayab.github.io/DocuExtract/" target="_blank" rel="noopener noreferrer">Open live app ↗</a>
               <a class="btn btn-ghost" href="https://github.com/MANayab/DocuExtract" target="_blank" rel="noopener noreferrer">View source code ↗</a>
