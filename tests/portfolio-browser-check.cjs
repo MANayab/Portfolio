@@ -83,10 +83,10 @@ const path = require('node:path');
       assert.equal(layout.headingCount, 1, 'Page should have exactly one H1');
       assert.deepEqual(layout.missingAnchors, [], 'Broken same-page anchor targets found');
 
-      await page.waitForFunction(() => document.querySelectorAll('.motion-reveal.motion-visible').length > 0, null, { timeout: 3000 });
       const motionState = await page.evaluate(() => ({
         progressExists: !!document.querySelector('.motion-progress'),
         revealTargets: document.querySelectorAll('.motion-reveal').length,
+        motionReady: document.documentElement.classList.contains('motion-ready'),
         hiddenUnrevealed: Array.from(document.querySelectorAll('.motion-reveal')).filter(el => getComputedStyle(el).opacity === '0').length,
         motionScript: Array.from(document.scripts).some(el => el.src.includes('motion.js?v=20261030-motion')),
         horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
@@ -94,9 +94,10 @@ const path = require('node:path');
       }));
       assert(motionState.motionScript, 'Motion script is not loaded');
       assert(motionState.revealTargets > 8, 'Scroll-reveal targets were not registered');
+      assert(motionState.motionReady, 'Progressive reveal mode did not initialize');
       assert.equal(motionState.horizontalOverflow, false, 'Motion system caused horizontal overflow');
       assert(motionState.progressExists, 'Scroll progress indicator is missing when motion is enabled');
-      assert(motionState.hiddenUnrevealed < motionState.revealTargets, 'All reveal content is hidden rather than progressively revealed');
+      assert(motionState.hiddenUnrevealed > 0, 'Scroll reveal did not defer offscreen items');
 
       const navToggle = page.locator('#navToggle');
       assert.equal(await navToggle.count(), 1, 'Navigation toggle is missing');
@@ -129,6 +130,8 @@ const path = require('node:path');
         window.scrollTo(0, 0);
       });
       await page.waitForTimeout(700);
+      const remainingHiddenReveals = await page.locator('.motion-reveal').evaluateAll(items => items.filter(el => getComputedStyle(el).opacity === '0').length);
+      assert.equal(remainingHiddenReveals, 0, `Some reveal content stayed hidden after scrolling: ${remainingHiddenReveals}`);
       await page.locator('img').evaluateAll(async images => {
         await Promise.all(images.map(img => {
           img.loading = 'eager';
