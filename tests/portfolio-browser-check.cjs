@@ -83,6 +83,7 @@ const path = require('node:path');
       assert.equal(layout.headingCount, 1, 'Page should have exactly one H1');
       assert.deepEqual(layout.missingAnchors, [], 'Broken same-page anchor targets found');
 
+      await page.waitForFunction(() => document.querySelectorAll('.motion-reveal.motion-visible').length > 0, null, { timeout: 3000 });
       const motionState = await page.evaluate(() => ({
         progressExists: !!document.querySelector('.motion-progress'),
         revealTargets: document.querySelectorAll('.motion-reveal').length,
