@@ -79,6 +79,7 @@
   }
 
   var counters = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+  if (!reduceMotion) counters.forEach(function (el) { el.textContent = "0"; });
   function countUp(el) {
     var target = Number(el.getAttribute("data-count"));
     if (!Number.isFinite(target) || target < 0) return;
