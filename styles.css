@@ -1383,3 +1383,19 @@ body.has-cursor-glow .cursor-glow { position: fixed; inset: 0; z-index: -1; poin
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .reveal-ready .reveal { opacity: 1; transform: none; }
 }
+
+/* Focus lane signal animation: thematic only, not a self-rated skill score. */
+.focus-lanes { margin-top: 1rem; padding: clamp(1rem, 2.5vw, 1.6rem); }
+.focus-lane { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(80px, 1.2fr) 44px; align-items: center; gap: .9rem; padding: .9rem 0; border-bottom: 1px solid var(--line); color: var(--text-lo); font-size: .78rem; }
+.focus-lane:last-child { border-bottom: 0; }
+.signal-track { height: 5px; overflow: hidden; border-radius: 9px; background: rgba(255,106,36,.12); }
+.signal-track i { display: block; width: 100%; height: 100%; transform: scaleX(.35); transform-origin: left; border-radius: inherit; background: linear-gradient(90deg, var(--brass), rgba(255,106,36,.2)); box-shadow: 0 0 12px rgba(255,106,36,.4); }
+.signal-blue { background: rgba(71,186,255,.12); }
+.signal-blue i { background: linear-gradient(90deg, var(--cyan), rgba(71,186,255,.2)); box-shadow: 0 0 12px rgba(71,186,255,.4); }
+.signal-yellow { background: rgba(255,211,78,.12); }
+.signal-yellow i { background: linear-gradient(90deg, var(--yellow), rgba(255,211,78,.2)); box-shadow: 0 0 12px rgba(255,211,78,.4); }
+.lane-code { text-align: right; color: var(--text-faint); font: .62rem var(--font-mono); }
+.reveal-ready .focus-lanes.is-visible .signal-track i { animation: signal-sweep 1.1s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes signal-sweep { from { transform: scaleX(0); } to { transform: scaleX(.72); } }
+@media (max-width: 520px) { .focus-lane { grid-template-columns: minmax(0,1fr) 38px; gap: .65rem; } .signal-track { grid-column: 1 / -1; grid-row: 2; } .lane-code { grid-column: 2; grid-row: 1; } }
+@media (prefers-reduced-motion: reduce) { .signal-track i { transform: scaleX(.55); animation: none !important; } }
