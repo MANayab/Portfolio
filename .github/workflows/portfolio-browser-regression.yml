@@ -1,6 +1,8 @@
 name: Portfolio browser regression
 
 on:
+  push:
+    branches: [fix/mobile-dashboard-production]
   pull_request:
     branches: [main]
   workflow_dispatch:
