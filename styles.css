@@ -1155,6 +1155,7 @@ a:focus-visible, button:focus-visible {
 html { scroll-padding-top: 6rem; background: var(--ink-900); }
 body {
   position: relative;
+  isolation: isolate;
   overflow-x: clip;
   color: var(--text-hi);
   background:
