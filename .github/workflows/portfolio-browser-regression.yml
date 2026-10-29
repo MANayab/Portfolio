@@ -1,0 +1,42 @@
+name: Portfolio browser regression
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser test dependency
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static portfolio server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory . > /tmp/portfolio-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+      - name: Run real-browser layout, console and reduced-motion checks
+        run: node tests/portfolio-browser-check.cjs
+      - name: Upload screenshots and layout metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-browser-screenshots
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 14
