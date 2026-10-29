@@ -1,0 +1,21 @@
+name: Live Pages SEO smoke test
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out audit
+        uses: actions/checkout@v4
+      - name: Verify live sitemap, robots, structured data and social metadata
+        run: python3 tests/portfolio-live-seo-audit.py

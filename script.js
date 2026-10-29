@@ -122,7 +122,9 @@
   // Lightweight ambient light streams. One canvas, capped DPR, paused in hidden tabs.
   var signalCanvas = document.getElementById("signalCanvas");
   var signalContext = signalCanvas && signalCanvas.getContext ? signalCanvas.getContext("2d", { alpha: true }) : null;
-  if (signalCanvas && signalContext && !reduceMotion) {
+  // Skip ambient canvas work on small viewports; it is decorative, not content.
+  var smallViewport = window.matchMedia && window.matchMedia("(max-width: 680px)").matches;
+  if (signalCanvas && signalContext && !reduceMotion && !smallViewport) {
     var streamWidth = 0, streamHeight = 0, streamDpr = 1, streamFrame = 0, streamRaf = 0, streamResizeTimer = 0;
     var signalStreams = [
       { color: "255,106,36", level: .24, phase: .3, amplitude: 20, speed: .00075 },
@@ -139,9 +141,13 @@
       signalCanvas.style.height = streamHeight + "px";
       signalContext.setTransform(streamDpr, 0, 0, streamDpr, 0, 0);
     }
-    function drawSignalStreams() {
-      streamFrame += 1;
-      signalContext.clearRect(0, 0, streamWidth, streamHeight);
+    var lastSignalDraw = 0;
+    function drawSignalStreams(now) {
+      // Keep the decorative animation to 30fps instead of repainting at 60fps.
+      if (now - lastSignalDraw >= 1000 / 30) {
+        lastSignalDraw = now;
+        streamFrame += 1;
+        signalContext.clearRect(0, 0, streamWidth, streamHeight);
       signalStreams.forEach(function (stream, index) {
         signalContext.beginPath();
         for (var x = -16; x <= streamWidth + 16; x += 14) {
@@ -156,7 +162,8 @@
         signalContext.shadowBlur = 9;
         signalContext.stroke();
       });
-      signalContext.shadowBlur = 0;
+        signalContext.shadowBlur = 0;
+      }
       streamRaf = window.requestAnimationFrame(drawSignalStreams);
     }
     function startSignalStreams() {

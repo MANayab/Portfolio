@@ -31,11 +31,9 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#080d18" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- System font stacks avoid third-party font requests and font-swap layout work. -->
 
-  <link rel="stylesheet" href="styles.css?v=20261029-hardening" />
+  <link rel="stylesheet" href="styles.css?v=20261029-perf" />
 
   <script type="application/ld+json">
   {
@@ -215,7 +213,7 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
 
     <!-- DASHBOARD HERO -->
     <section class="hero dashboard-hero" id="top" aria-labelledby="hero-heading">
@@ -718,6 +716,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261029-mobile-fix"></script>
+  <script src="script.js?v=20261029-perf"></script>
 </body>
 </html>
